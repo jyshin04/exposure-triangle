@@ -1,15 +1,51 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const upArrow = document.getElementById("up-arrow");
-    const downArrow = document.getElementById("down-arrow");
-    const feedbackContainer = document.getElementById("feedback-container");
+document.addEventListener('DOMContentLoaded', function () {
+    const adjustButtons = document.querySelectorAll('.adjust-btn');
+    const feedbackContainer = document.getElementById('feedback-container');
+    const feedbackTitle = document.getElementById('feedback-title');
+    const feedbackMessage = document.getElementById('feedback-message');
+    const nextBtn = document.getElementById('next-btn');
 
-    // When the up arrow (correct answer) is clicked
-    upArrow.addEventListener("click", () => {
-        feedbackContainer.style.display = "block"; // Show feedback message
-    });
+    const quizContainer = document.querySelector('.quiz-container');
+    const questionId = quizContainer.dataset.questionId;
+    const correctAction = quizContainer.dataset.correctAction;
+    const correctFeedback = quizContainer.dataset.feedbackCorrect;
+    const incorrectFeedback = quizContainer.dataset.feedbackIncorrect;
 
-    // Optionally, you can add behavior for the down arrow (incorrect answer)
-    downArrow.addEventListener("click", () => {
-        alert("Try Again! Remember, you need to increase the shutter speed.");
+    function save_answer(isCorrect) {
+        fetch('/save_quiz_result', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                question_id: questionId,
+                correct: isCorrect,
+            }),
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                console.log('Result saved:', data);
+            })
+            .catch((error) => {
+                console.error('Error saving result:', error);
+            });
+    }
+
+    adjustButtons.forEach((button) => {
+        button.addEventListener('click', function () {
+            const userAction = this.dataset.action;
+            const isCorrect = userAction === correctAction;
+
+            save_answer(isCorrect);
+
+            feedbackContainer.style.display = 'block';
+            feedbackContainer.className = isCorrect ? 'feedback correct' : 'feedback incorrect';
+            feedbackTitle.textContent = isCorrect ? 'Correct!' : 'Incorrect';
+            feedbackMessage.textContent = isCorrect ? correctFeedback : incorrectFeedback;
+
+            
+            nextBtn.style.display = 'inline-block';
+            
+        });
     });
 });

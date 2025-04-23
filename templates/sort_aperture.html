@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<div class="quiz-container">
+<div class="quiz-container" data-question-id="{{ question.id }}">
     <h2>Sort from Highest to Lowest Aperture</h2>
     <p class="instructions">Drag the images into the correct order starting with the highest f-number (smallest opening) to the lowest (largest opening).</p>
 

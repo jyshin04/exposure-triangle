@@ -60,4 +60,31 @@ function checkOrder() {
         title.textContent = "Try Again";
         message.textContent = "The order isn't quite right. ";
     }
+
+    // ✅ Send result to Flask
+    const questionId = document.querySelector('.quiz-container').dataset.questionId;// assumes quiz-container holds data-question-id
+    fetch("/save_quiz_result", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            question_id: questionId,
+            correct: isCorrect
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Result saved:", data);
+    })
+    .catch(error => {
+        console.error("Error saving result:", error);
+    });
 }
+
+
+
+
+
+
+

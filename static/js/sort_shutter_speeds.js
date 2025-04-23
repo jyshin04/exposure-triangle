@@ -54,10 +54,38 @@ function checkOrder() {
     feedback.style.display = "block";
     if (isCorrect) {
         title.textContent = "Correct!";
-        message.textContent = "You've successfully sorted the shutter speeds from highest to lowest.";
+        message.textContent = "You've successfully sorted the shutter speed from highest to lowest.";
         nextBtn.style.display = "inline-block";
     } else {
-        title.textContent = "Try Again";
-        message.textContent = "The order isn't quite right.";
+        title.textContent = "Incorrect.";
+        message.textContent = "The order isn't quite right. ";
+        nextBtn.style.display = "inline-block";
     }
+
+    // ✅ Send result to Flask
+    const questionId = document.querySelector('.quiz-container').dataset.questionId;// assumes quiz-container holds data-question-id
+    fetch("/save_quiz_result", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            question_id: questionId,
+            correct: isCorrect
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Result saved:", data);
+    })
+    .catch(error => {
+        console.error("Error saving result:", error);
+    });
 }
+
+
+
+
+
+
+

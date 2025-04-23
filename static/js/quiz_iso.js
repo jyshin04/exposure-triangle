@@ -1,3 +1,5 @@
+
+
 document.addEventListener('DOMContentLoaded', function() {
     const draggables = document.querySelectorAll('.draggable');
     const dropZones = document.querySelectorAll('.drop-zone');
@@ -67,29 +69,48 @@ document.addEventListener('DOMContentLoaded', function() {
     
         checkCompletion();
     }
-    
     function checkCompletion() {
         const filledZones = Array.from(dropZones).filter(zone => zone.dataset.selected);
-
+    
         if (filledZones.length === dropZones.length) {
             const allCorrect = filledZones.every(zone =>
                 zone.dataset.selected === zone.dataset.correct
             );
-
+    
+            const questionId = document.querySelector('.quiz-container').dataset.questionId;
+    
+            // Send result to Flask
+            fetch('/save_quiz_result', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    question_id: questionId,
+                    correct: allCorrect
+                })
+            });
+    
             feedbackShown = true;
-
+    
             if (allCorrect) {
                 showFeedback(true);
-                nextBtn.style.display = 'inline-block';
                 dropZones.forEach(zone => zone.classList.add('correct'));
             } else {
                 showFeedback(false);
-                setTimeout(() => {
-                    resetIncorrectAnswers();
-                }, 1500);
+                dropZones.forEach(zone => {
+                    if (zone.dataset.selected !== zone.dataset.correct) {
+                        zone.classList.add('incorrect');
+                    } else {
+                        zone.classList.add('correct');
+                    }
+                });
             }
+    
+            nextBtn.style.display = 'inline-block';
         }
     }
+    
 
     function showFeedback(isCorrect) {
         feedbackContainer.style.display = 'block';
@@ -103,41 +124,9 @@ document.addEventListener('DOMContentLoaded', function() {
             feedbackContainer.style.backgroundColor = 'rgba(220, 53, 69, 0.1)';
             feedbackContainer.style.borderColor = '#dc3545';
             feedbackTitle.textContent = 'Incorrect';
-            feedbackMessage.textContent = 'Some matches are incorrect. Try again!';
+            feedbackMessage.textContent = 'Some matches are incorrect.';
         }
     }
 
-    function resetIncorrectAnswers() {
-        feedbackContainer.style.display = 'none';
-        feedbackShown = false;
-
-        dropZones.forEach(zone => {
-            if (zone.dataset.selected !== zone.dataset.correct) {
-                zone.classList.add('incorrect');
-
-
-                const option = zone.querySelector('.draggable');
-                if (option) {
-                    // Find if an identical option already exists in the options area
-                    const optionsContainer = document.querySelector('.draggable-options');
-                    const alreadyExists = Array.from(optionsContainer.children).some(child => 
-                        child.dataset.value === option.dataset.value
-                    );
-                
-                    // Only append it back if it's not already there
-                    if (!alreadyExists) {
-                        optionsContainer.appendChild(option);
-                    }
-                
-                    zone.innerHTML = '<span class="placeholder">Drop f-number here</span>';
-                    delete zone.dataset.selected;
-                    zone.classList.remove('incorrect');
-                }
-                
-
-            } else {
-                zone.classList.add('correct');
-            }
-        });
-    }
+    
 });

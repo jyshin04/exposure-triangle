@@ -1,7 +1,12 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<div class="quiz-container">
+<div class="quiz-container"
+     data-question-id="{{ question.id }}"
+     data-correct-action="{{ question.data.correct_action }}"
+     data-feedback-correct="{{ question.data.feedback.correct }}"
+     data-feedback-incorrect="{{ question.data.feedback.incorrect }}">
+
     
 
     <h2>{{ question.title }}</h2>
@@ -18,10 +23,10 @@
             </div>
             
             <div class="adjust-buttons">
-                <button class="btn btn-black adjust-btn" data-action="increase">
+                <button id="up-arrow" class="btn btn-black adjust-btn" data-action="increase">
                     <i class="bi bi-arrow-up"></i> Increase
                 </button>
-                <button class="btn btn-black adjust-btn" data-action="decrease">
+                <button id="down-arrow" class="btn btn-black adjust-btn" data-action="decrease">
                     <i class="bi bi-arrow-down"></i> Decrease
                 </button>
             </div>
@@ -93,32 +98,5 @@
     }
 </style>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const adjustButtons = document.querySelectorAll('.adjust-btn');
-        const feedbackContainer = document.getElementById('feedback-container');
-        const feedbackTitle = document.getElementById('feedback-title');
-        const feedbackMessage = document.getElementById('feedback-message');
-        const nextBtn = document.getElementById('next-btn');
-        
-        adjustButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                const userAction = this.dataset.action;
-                const correctAction = "{{ question.data.correct_action }}";
-                const isCorrect = userAction === correctAction;
-                
-                // Show feedback
-                feedbackContainer.style.display = 'block';
-                feedbackContainer.className = isCorrect ? 'feedback correct' : 'feedback incorrect';
-                feedbackTitle.textContent = isCorrect ? 'Correct!' : 'Incorrect';
-                feedbackMessage.textContent = "{{ question.data.feedback.correct if isCorrect else question.data.feedback.incorrect }}";
-                
-                // Show next button if correct
-                if (isCorrect) {
-                    nextBtn.style.display = 'inline-block';
-                }
-            });
-        });
-    });
-</script>
+<script src="{{ url_for('static', filename='js/adjust_shutter_speed.js') }}"></script>
 {% endblock %}
