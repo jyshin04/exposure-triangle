@@ -1,0 +1,129 @@
+.home-container {
+    padding: 3rem 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.hero-image {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.start-section {
+    background: rgba(255,255,255,0.9);
+    padding: 0rem;
+    border-radius: 10px;
+    margin: 2rem auto;
+    max-width: 600px;
+    margin-bottom: 0.5rem !important;
+}
+
+:root {
+    --black: #000000;
+    --white: #ffffff;
+    --gray: #f8f9fa;
+}
+
+body {
+    background-color: var(--white);
+    color: var(--black);
+}
+
+.btn, .btn-primary, .btn-success, .btn-info, .btn-secondary {
+    background-color: var(--black) !important;
+    color: var(--white) !important;
+    border: 1px solid var(--black) !important;
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #333333 !important;
+    border-color: #333333 !important;
+}
+
+.alert {
+    background-color: var(--black);
+    color: var(--white);
+    border: 1px solid var(--black);
+}
+
+.form-control:focus {
+    border-color: var(--black);
+    box-shadow: 0 0 0 0.25rem rgba(0, 0, 0, 0.25);
+}
+
+.draggable {
+    background-color: var(--gray);
+    color: var(--black);
+}
+
+.dropzone {
+    border-color: var(--black);
+}
+
+footer {
+    background-color: var(--black) !important;
+    color: var(--white) !important;
+}
+
+.header-nav {
+    background-color: var(--black);
+    padding: 1rem 0;
+    border-bottom: 2px solid var(--black);
+}
+
+.nav-brand {
+    color: var(--white) !important;
+    font-weight: 700;
+    font-size: 1.5rem;
+    margin-left: 1rem;
+}
+
+.nav-link {
+    color: var(--white) !important;
+    margin-right: 2rem;
+    padding: 0.5rem 1rem !important;
+    transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+    background-color: var(--white) !important;
+    color: var(--black) !important;
+    border-radius: 4px;
+}
+
+h2 {
+    font-size: 12px;
+}
+
+.welcome-heading {
+    font-size: 1.5rem; 
+    font-weight: 400;
+    color: #333;
+}
+
+.camera-basics-heading {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #333;
+    font-style: italic;
+}
+
+
+.skip-link {
+    margin-top: 0.5rem !important;
+    font-style: italic;
+    text-decoration: underline;
+}
+
+.skip-link small {
+    cursor: pointer;
+    transition: all 0.2s ease; /* Optional for hover effects */
+}
+
+/* Optional hover effect to make it more button-like */
+.skip-link small:hover {
+    opacity: 0.8;
+    text-decoration: underline;
+}
