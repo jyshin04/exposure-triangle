@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="position-relative" style="min-height: 80vh;">
+    <div>
+        <h2 class="camera-basics-heading mb-5">Play with Shutter Speed 🎮</h2>
+        <p class="fs-5">Use the slider below to see how shutter speed affects the image.</p>
+    </div>
+
+    <div class="row align-items-center">
+        <div class="col-md-6 text-center">
+            <img id="shutter-img" src="{{ url_for('static', filename='images/img_learn_11_1.png') }}" 
+                 class="img-fluid rounded" alt="Shutter Speed Demo">
+        </div>
+
+        <div class="col-md-6 text-center">
+            <label for="shutterSlider" class="form-label fw-bold fs-5">Shutter Speed</label>
+            <input type="range" min="1" max="4" value="1" class="form-range w-75 mx-auto" id="shutterSlider">
+            <p id="shutterValue" class="mt-2 fs-5">1/4</p>
+        </div>
+    </div>
+
+    <div style="position: absolute; bottom: 0; right: 0; padding: 50px;">
+        <a href="/" class="btn btn-success btn-lg">NEXT</a>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    const slider = document.getElementById("shutterSlider");
+    const image = document.getElementById("shutter-img");
+    const valueText = document.getElementById("shutterValue");
+
+    const speeds = {
+        1: { value: "1/4",  src: "{{ url_for('static', filename='images/img_learn_11_1.png') }}" },
+        2: { value: "1/15", src: "{{ url_for('static', filename='images/img_learn_11_2.png') }}" },
+        3: { value: "1/30", src: "{{ url_for('static', filename='images/img_learn_11_3.png') }}" },
+        4: { value: "1/60", src: "{{ url_for('static', filename='images/img_learn_11_4.png') }}" }
+    };
+
+    slider.addEventListener("input", function () {
+        const setting = speeds[this.value];
+        image.src = setting.src;
+        valueText.textContent = setting.value;
+    });
+</script>
+{% endblock %}
