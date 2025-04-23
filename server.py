@@ -54,7 +54,7 @@ def show_quiz(question_id):
 
 
 
-# page 2-5, 10-11, learning material
+# page 2-5, 10-12, learning material
 @app.route('/start')
 def learn_start():
     return render_template('learn_1.html')
@@ -90,6 +90,23 @@ def learn_7():
 @app.route('/learn/8')
 def learn_8():
     return render_template('learn_8.html')
+
+@app.route('/learn/9')
+def learn_9():
+    return render_template('learn_9.html')
+
+@app.route('/learn/10')
+def learn_10():
+    return render_template('learn_10.html')
+
+@app.route('/learn/11')
+def learn_11():
+    return render_template('learn_11.html')
+
+@app.route('/finish')
+def finish():
+    return render_template('finish.html')
+
 
 if __name__ == '__main__':
     app.run(debug=True, port=5001)

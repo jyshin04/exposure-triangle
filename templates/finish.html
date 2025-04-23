@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="home-container text-center">
+    <h2 class="welcome-heading mb-4">🎉 You’ve completed </h2>
+    <h1 class="camera-basics-heading mb-5">Camera Basics: The Exposure Triangle</h1>
+    
+    <p class="lead mb-4">You now know how aperture, shutter speed, and ISO work together to control exposure.</p>
+
+
+    <div class="mb-5">
+        <img src="{{ url_for('static', filename='images/exposure-triangle-hero.jpg') }}" 
+             alt="Exposure Triangle Diagram"
+             class="img-fluid rounded">
+    </div>
+
+    <div class="start-section">
+        <button onclick="location.href='/'" 
+                class="btn btn-lg btn-success">
+            BACK TO HOME
+        </button>
+    </div>
+
+    <div class="text-muted skip-link">
+        <small onclick="location.href='/'" >
+            KEEP ON EXPLORING
+        </small>
+    </div>
+</div>
+{% endblock %}

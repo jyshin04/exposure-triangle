@@ -1,0 +1,73 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="position-relative" style="min-height: 80vh;">
+    <div>
+        <h2 class="camera-basics-heading mb-5">Play with the Exposure Triangle 🎮</h2>
+        <p class="fs-5">Use the sliders below to see how aperture, shutter speed, and ISO affect the image.
+        </p>
+    </div>
+    <div class="mt-4 row align-items-start g-4">
+        <!-- Image Column -->
+        <div class="col-md-6">
+            <img id="Exposure-triangle-play-img"
+                 src="[REPLACE-WITH-VALID-IMAGE-URL]"
+                 alt="Exposure Triangle Demo" 
+                 class="img-fluid rounded shadow">
+        </div>
+
+        <!-- Sliders Column -->
+        <div class="col-md-6">
+            <div class="d-flex flex-column gap-4">
+                <!-- Aperture Slider -->
+                <div class="text-center">
+                    <label for="apertureSlider" class="form-label fw-bold fs-5">Aperture</label>
+                    <input type="range" min="1" max="4" value="1" 
+                           class="form-range w-75 mx-auto" id="apertureSlider">
+                    <p id="apertureValue" class="mt-2 fs-5 mb-0">f/2.8</p>
+                </div>
+
+                <!-- Shutter Speed Slider -->
+                <div class="text-center">
+                    <label for="shutterSlider" class="form-label fw-bold fs-5">Shutter Speed</label>
+                    <input type="range" min="1" max="4" value="1" 
+                           class="form-range w-75 mx-auto" id="shutterSlider">
+                    <p id="shutterValue" class="mt-2 fs-5 mb-0">1/4</p>
+                </div>
+
+                <!-- ISO Slider -->
+                <div class="text-center">
+                    <label for="isoSlider" class="form-label fw-bold fs-5">ISO</label>
+                    <input type="range" min="1" max="4" value="1" 
+                           class="form-range w-75 mx-auto" id="isoSlider">
+                    <p id="isoValue" class="mt-2 fs-5 mb-0">300</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div style="position: absolute; bottom: 0; right: 0; padding: 50px;">
+        <a href="/learn/11" class="btn btn-success btn-lg">NEXT</a>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    const slider = document.getElementById("apertureSlider");
+    const image = document.getElementById("aperture-img");
+    const valueText = document.getElementById("apertureValue");
+
+    const apertures = {
+        1: { value: "f/2.8", src: "{{ url_for('static', filename='images/img_learn_5_1.png') }}" },
+        2: { value: "f/5.6", src: "{{ url_for('static', filename='images/img_learn_5_2.png') }}" },
+        3: { value: "f/8",   src: "{{ url_for('static', filename='images/img_learn_5_3.png') }}" },
+        4: { value: "f/16",  src: "{{ url_for('static', filename='images/img_learn_5_4.png') }}" }
+    };
+
+    slider.addEventListener("input", function () {
+        const setting = apertures[this.value];
+        image.src = setting.src;
+        valueText.textContent = setting.value;
+    });
+</script>
+{% endblock %}
