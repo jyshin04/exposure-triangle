@@ -13,18 +13,18 @@
         <div class="mb-4 position-relative">
             <p class="fs-5"><strong>Goal Image</strong></p>
             <img id="Exposure-triangle-goal-play2-img"
-                 src="[GOAL-IMAGE-URL]"
-                 alt="Exposure Triangle Demo2 Goal" 
-                 class="img-fluid rounded shadow">
+     src="{{ url_for('static', filename='images/goal.png') }}"
+     alt="Exposure Triangle Demo2 Goal" 
+     class="img-fluid rounded shadow">
         </div>
 
         <!-- Demo Image Container -->
         <div class="position-relative">
             <p class="fs-5"><strong>Your Adjustment</strong></p>
             <img id="Exposure-triangle-play2-img"
-                 src="[DEMO-IMAGE-URL]"
-                 alt="Exposure Triangle Demo 2" 
-                 class="img-fluid rounded shadow">
+     src="{{ url_for('static', filename='images/working.png') }}"
+     alt="Exposure Triangle Demo 2" 
+     class="img-fluid rounded shadow">
         </div>
     </div>
 

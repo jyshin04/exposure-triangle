@@ -10,11 +10,11 @@
           "options": ["f/2.0", "f/16"],
           "images": [
             {
-              "src": "shallow-dof.jpg",
+              "src": "quiz_aperture_low.png",
               "correct_answer": "f/2.0"
             },
             {
-              "src": "deep-dof.jpg", 
+              "src": "quiz_aperture_high.png", 
               "correct_answer": "f/16"
             }
           ]
@@ -55,7 +55,7 @@
         "title": "Shutter Speed Adjusting Time!",
         "data": {
           "instruction": "You want to capture a sharp photo of a cyclist, without motion blur like the photo below. Should you increase or decrease the shutter speed?",
-          "image": "cyclist-blur.jpg",
+          "image": "cyclist-blur.png",
           "current_speed": "1/60",
           "correct_action": "increase",
           "feedback": {
@@ -72,7 +72,7 @@
         "title": "Shutter Speed Adjusting Time!",
         "data": {
           "instruction": "You want to capture the face of the person which is currently too dark. Should you increase or decrease the shutter speed?",
-          "image": "face.jpg",
+          "image": "face.png",
           "current_speed": "1/250",
           "correct_action": "decrease",
           "feedback": {
@@ -90,24 +90,19 @@
             "instruction": "Drag the images to sort them from fastest shutter speed (freezes motion) to slowest shutter speed (shows motion blur).",
             "images": [
                 {
-                    "src": "shutter-1000.jpg",
+                    "src": "shutter-1000.png",
                     "speed_value": 1000,
                     "description": "1/1000s - Freezes fast action"
                 },
                 {
-                    "src": "shutter-250.jpg",
+                    "src": "shutter-250.png",
                     "speed_value": 250,
                     "description": "1/250s - Good for walking"
                 },
                 {
-                    "src": "shutter-60.jpg", 
+                    "src": "shutter-60.png", 
                     "speed_value": 60,
                     "description": "1/60s - May show slight blur"
-                },
-                {
-                    "src": "shutter-15.jpg",
-                    "speed_value": 15,
-                    "description": "1/15s - Shows motion blur"
                 }
             ]
         }
@@ -122,11 +117,11 @@
         "options": ["100", "1600"],
         "images": [
           {
-            "src": "iso100.jpg",
+            "src": "iso_100.png",
             "correct_answer": "100"
           },
           {
-            "src": "iso1600.jpg", 
+            "src": "iso_1600.png", 
             "correct_answer": "1600"
           }
         ]
@@ -141,20 +136,20 @@
         "instruction": "Drag the images to sort them from highest ISO to lowest ISO.",
         "images": [
           {
-            "src": "aperture-f16.jpg",
-            "iso": 1600
+            "src": "iso-6400.png",
+            "iso": 6400
           },
           {
-            "src": "aperture-f8.jpg",
+            "src": "iso-3200.png",
+            "iso": 3200
+          },
+          {
+            "src": "iso-1000.png",
             "iso": 1000
           },
           {
-            "src": "aperture-f4.jpg",
-            "iso": 500
-          },
-          {
-            "src": "aperture-f2.jpg",
-            "iso": 100
+            "src": "iso-200.png",
+            "iso": 200
           }
         ]
       }
