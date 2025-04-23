@@ -3,7 +3,7 @@
 <div class="home-container text-center">
     <h2 class="welcome-heading mb-4">🎉 You’ve completed </h2>
     <h1 class="camera-basics-heading mb-5">Camera Basics: The Exposure Triangle</h1>
-    <p class="lead mb-4">Quiz Score:</p>
+    <p class="lead mb-4">Quiz Score:<strong id="score-display">Loading...</strong></p>
 
     <p class="lead mb-4">You now know how aperture, shutter speed, and ISO work together to control exposure.</p>
 
@@ -28,4 +28,29 @@
         </small>
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        fetch('http://127.0.0.1:5001/quiz_results')
+            .then(response => response.json())
+            .then(data => {
+                let totalQuestions = Object.keys(data).length;
+                let correctAnswers = 0;
+    
+                for (const key in data) {
+                    if (data.hasOwnProperty(key)) {
+                        if (data[key].correct === true) {
+                            correctAnswers++;
+                        }
+                    }
+                }
+    
+                document.getElementById('score-display').textContent = `${correctAnswers} / ${totalQuestions}`;
+            })
+            .catch(error => {
+                console.error('Error fetching quiz results:', error);
+                document.getElementById('score-display').textContent = 'Unable to load score';
+            });
+    });
+    </script>
 {% endblock %}
