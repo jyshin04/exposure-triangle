@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="position-relative" style="min-height: 80vh;">
+    <div class="row align-items-center">
+        <div class="col-md-8">
+            <h2 class="camera-basics-heading mb-5">ISO - Sensitivity to Light</h2>
+            <p class="fs-5">ISO controls the camera’s sensitivity to light.</p>
+            <br>
+                <li class="fs-5">Low ISO (100) = clean image, less light</li>
+                <li class="fs-5">High ISO (3200) = brighter image, but more noise (grainy look)</li>
+            </br>
+            <div class="mt-4 p-3" style="border: 1px solid #000; border-radius: 10px;">
+                <p class="fs-5 mb-1"><strong>Tip!</strong></p>
+                <p class="fs-5 mb-1">Use high ISO in dark settings, but keep it low when possible to avoid noise.</p>
+            </div>            
+        </div>
+        <div class="col-md-4 text-center">
+            <img src="https://images.app.goo.gl/4REHJya1TWEJgoyH7" 
+            alt="ISO Comparison" 
+            class="img-fluid rounded">
+        </div>
+    </div>
+    <div style="position: absolute; bottom: 0; right: 0; padding: 50px;">
+        <a href="/learn/8" class="btn btn-primary btn-lg">TRY IT!</a>
+    </div>
+</div>
+{% endblock %}

@@ -83,5 +83,13 @@ def learn_5():
 def learn_6():
     return render_template('learn_6.html')
 
+@app.route('/learn/7')
+def learn_7():
+    return render_template('learn_7.html')
+
+@app.route('/learn/8')
+def learn_8():
+    return render_template('learn_8.html')
+
 if __name__ == '__main__':
     app.run(debug=True, port=5001)
