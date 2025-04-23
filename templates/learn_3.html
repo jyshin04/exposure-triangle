@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="position-relative" style="min-height: 80vh;">
+    <div class="row align-items-center">
+        <div class="col-md-8">
+            <h2 class="camera-basics-heading mb-5">Aperture – The Eye of the Camera</h2>
+            <p class="fs-5">Aperture is the opening in the lens that lets light into the camera.</p>
+            <p class="fs-5">
+                It's measured in f-numbers like f/1.8, f/4, or f/16.
+                <ul>
+                    <li class="fs-5">Lower f-number (e.g., f/1.8) = wider opening = more light</li>
+                    <li class="fs-5">Higher f-number (e.g., f/16) = smaller opening = less light</li>
+                </ul>
+            </p>
+            <p class="fs-5">Think of it like the pupil of your eye. In the dark, your pupil gets bigger to let in more light.</p>
+        </div>
+        <div class="col-md-4 text-center">
+            <img src="{{ url_for('static', filename='images/img_learn_3_1.png') }}" alt="Aperture Examples" class="img-fluid rounded">
+        </div>
+    </div>
+    <div style="position: absolute; bottom: 0; right: 0; padding: 50px;">
+        <a href="/learn/4" class="btn btn-primary btn-lg">NEXT</a>
+    </div>
+</div>
+{% endblock %}

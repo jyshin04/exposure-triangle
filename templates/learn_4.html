@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="position-relative" style="min-height: 80vh;">
+    <div class="row align-items-center">
+        <div class="col-md-8">
+            <h2 class="camera-basics-heading mb-5">Aperture Affects Background Blur</h2>
+            <p class="fs-5">Aperture doesn’t just change brightness — it also affects depth of field, or how much of the image is in focus.</p>
+            <br>
+                <li class="fs-5">A wide aperture (e.g., f/2.8) creates a blurry background and a sharp subject — great for portraits.</li>
+                <li class="fs-5">A narrow aperture (e.g., f/16) keeps more of the scene in focus — useful for landscapes.</li>
+            </br>
+            <div class="mt-4 p-3" style="border: 1px solid #000; border-radius: 10px;">
+                <p class="fs-5 mb-1"><strong>Tip!</strong></p>
+                <p class="fs-5 mb-1">Want blurry backgrounds? Use a lower f-number.</p>
+                <p class="fs-5">Want everything sharp? Use a higher f-number.</p>
+            </div>            
+        </div>
+        <div class="col-md-4 text-center">
+            <img src="{{ url_for('static', filename='images/img_learn_4_1.png') }}" alt="Blur Comparison" class="img-fluid rounded">
+        </div>
+    </div>
+    <div style="position: absolute; bottom: 0; right: 0; padding: 50px;">
+        <a href="/learn/5" class="btn btn-primary btn-lg">TRY IT!</a>
+    </div>
+</div>
+{% endblock %}
