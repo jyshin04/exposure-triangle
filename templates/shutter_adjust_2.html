@@ -1,0 +1,124 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="quiz-container">
+    
+
+    <h2>{{ question.title }}</h2>
+    <p class="instructions">{{ question.data.instruction }}</p>
+    
+    <div class="shutter-quiz-content">
+        <img src="{{ url_for('static', filename='images/' + question.data.image) }}" 
+             class="quiz-image img-fluid mb-4"
+             alt="Cyclist with motion blur">
+        
+        <div class="speed-control">
+            <div class="current-speed">
+                Current: {{ question.data.current_speed }}
+            </div>
+            
+            <div class="adjust-buttons">
+                <button class="btn btn-black adjust-btn" data-action="increase">
+                    <i class="bi bi-arrow-up"></i> Increase
+                </button>
+                <button class="btn btn-black adjust-btn" data-action="decrease">
+                    <i class="bi bi-arrow-down"></i> Decrease
+                </button>
+            </div>
+        </div>
+        
+        <div id="feedback-container" class="feedback" style="display: none;">
+            <h3 id="feedback-title"></h3>
+            <p id="feedback-message"></p>
+        </div>
+    </div>
+    
+    <div class="navigation mt-4">
+        <a href="{{ url_for('show_quiz', question_id=5) }}"
+           class="btn btn-black" 
+           id="next-btn" 
+           style="display:none;">
+            {% if next_id %}NEXT QUESTION{% else %}SEE RESULTS{% endif %}
+        </a>
+    </div>
+</div>
+
+<style>
+    .shutter-quiz-content {
+        max-width: 600px;
+        margin: 0 auto;
+        text-align: center;
+    }
+    
+    .speed-control {
+        background-color: #f8f9fa;
+        padding: 1.5rem;
+        border-radius: 8px;
+        margin: 2rem 0;
+    }
+    
+    .current-speed {
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin-bottom: 1rem;
+    }
+    
+    .adjust-buttons {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+    }
+    
+    .adjust-btn {
+        min-width: 120px;
+    }
+    
+    .feedback {
+        margin: 2rem auto;
+        padding: 1.5rem;
+        border-radius: 8px;
+        max-width: 600px;
+        text-align: center;
+        display: none;
+    }
+    
+    .feedback.correct {
+        background-color: rgba(40, 167, 69, 0.1);
+        border: 1px solid #28a745;
+    }
+    
+    .feedback.incorrect {
+        background-color: rgba(220, 53, 69, 0.1);
+        border: 1px solid #dc3545;
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const adjustButtons = document.querySelectorAll('.adjust-btn');
+        const feedbackContainer = document.getElementById('feedback-container');
+        const feedbackTitle = document.getElementById('feedback-title');
+        const feedbackMessage = document.getElementById('feedback-message');
+        const nextBtn = document.getElementById('next-btn');
+        
+        adjustButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const userAction = this.dataset.action;
+                const correctAction = "{{ question.data.correct_action }}";
+                const isCorrect = userAction === correctAction;
+                
+                // Show feedback
+                feedbackContainer.style.display = 'block';
+                feedbackContainer.className = isCorrect ? 'feedback correct' : 'feedback incorrect';
+                feedbackTitle.textContent = isCorrect ? 'Correct!' : 'Incorrect';
+                feedbackMessage.textContent = "{{ question.data.feedback.correct if isCorrect else question.data.feedback.incorrect }}";
+                
+                // Show next button if correct
+                if (isCorrect) {
+                    nextBtn.style.display = 'inline-block';
+                }
+            });
+        });
+    });
+</script>
+{% endblock %}

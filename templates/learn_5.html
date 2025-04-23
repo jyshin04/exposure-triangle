@@ -1,47 +1,27 @@
 {% extends "layout.html" %}
 {% block content %}
 <div class="position-relative" style="min-height: 80vh;">
-    <div>
-        <h2 class="camera-basics-heading mb-5">Play with Aperture 🎮</h2>
-        <p class="fs-5">Use the slider below to see how aperture affects the image.</p>
-    </div>
-
     <div class="row align-items-center">
-        <div class="col-md-6 text-center">
-            <img id="aperture-img" src="{{ url_for('static', filename='images/img_learn_5_1.png') }}" 
-                 class="img-fluid rounded" alt="Aperture Demo">
+        <div class="col-md-8">
+            <h2 class="camera-basics-heading mb-5">Shutter Speed – Controlling Motion</h2>
+            <p class="fs-5">Shutter speed is how long the shutter stays open to let in light.</p>
+            <br>
+                <li class="fs-5">Fast speed (e.g., 1/1000s) = freezes action</li>
+                <li class="fs-5">Slow speed (e.g., 1s) = creates motion blur</li>
+            </br>
+            <div class="mt-4 p-3" style="border: 1px solid #000; border-radius: 10px;">
+                <p class="fs-5 mb-1"><strong>Tip!</strong></p>
+                <p class="fs-5 mb-1">Use fast shutter speed for sports or action</p>
+                <p class="fs-5">Use slow shutter speed for light trails or water blur</p>
+                <p class="fs-5">Slower speeds can cause camera shake → use tripod</p>
+            </div>            
         </div>
-
-        <div class="col-md-6 text-center">
-            <label for="apertureSlider" class="form-label fw-bold fs-5">Aperture</label>
-            <input type="range" min="1" max="4" value="1" class="form-range w-75 mx-auto" id="apertureSlider">
-            <p id="apertureValue" class="mt-2 fs-5">f/2.8</p>
+        <div class="col-md-4 text-center">
+            <img src="{{ url_for('static', filename='images/img_learn_10_1.png') }}" alt="Blur Comparison" class="img-fluid rounded">
         </div>
     </div>
-
     <div style="position: absolute; bottom: 0; right: 0; padding: 50px;">
-        <a href="/" class="btn btn-success btn-lg">NEXT</a>
+        <a href="/learn/6" class="btn btn-primary btn-lg">TRY IT!</a>
     </div>
 </div>
-{% endblock %}
-
-{% block scripts %}
-<script>
-    const slider = document.getElementById("apertureSlider");
-    const image = document.getElementById("aperture-img");
-    const valueText = document.getElementById("apertureValue");
-
-    const apertures = {
-        1: { value: "f/2.8", src: "{{ url_for('static', filename='images/img_learn_5_1.png') }}" },
-        2: { value: "f/5.6", src: "{{ url_for('static', filename='images/img_learn_5_2.png') }}" },
-        3: { value: "f/8",   src: "{{ url_for('static', filename='images/img_learn_5_3.png') }}" },
-        4: { value: "f/16",  src: "{{ url_for('static', filename='images/img_learn_5_4.png') }}" }
-    };
-
-    slider.addEventListener("input", function () {
-        const setting = apertures[this.value];
-        image.src = setting.src;
-        valueText.textContent = setting.value;
-    });
-</script>
 {% endblock %}

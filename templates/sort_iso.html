@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="quiz-container">
+    <h2>Sort from Highest to Lowest ISO</h2>
+    <p class="instructions">Drag the images into the correct order starting with the highest ISO to the lowest ISO.</p>
+
+    <div class="sortable-container" id="sortable-list">
+        {% for image in question.data.images %}
+        <div class="sortable-item" data-value="{{ image.iso }}">
+            <img src="{{ url_for('static', filename='images/' + image.src) }}"
+                 class="quiz-image img-fluid"
+                 alt="ISO image {{ image.iso }}">
+        </div>
+        {% endfor %}
+    </div>
+
+    <button class="btn btn-black mt-4" onclick="checkOrder()">Check Answer</button>
+
+    <div id="feedback-container" style="display:none;">
+        <h3 id="feedback-title"></h3>
+        <p id="feedback-message"></p>
+    </div>
+
+    <div class="navigation mt-4">
+        <a href="/" 
+           class="btn btn-black" 
+           id="next-btn" 
+           style="display:none;">
+            {% if next_id %}NEXT LESSON{% else %}SEE RESULTS{% endif %}
+        </a>
+    </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/sort_iso.js') }}"></script>
+{% endblock %}

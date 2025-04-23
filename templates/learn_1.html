@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="position-relative" style="min-height: 80vh;">
+    <div class="row align-items-center">
+        <div class="col-md-8">
+            <h2 class="camera-basics-heading mb-5">What is the Exposure Triangle?</h2>
+            <p class="fs-5">
+                To take a well-exposed photo, your camera needs to control how much light reaches the sensor.
+            </p>
+            <p class="fs-5">
+                This is done using <strong>three settings:</strong>
+                <ul class="fs-5">
+                    <li><strong>Aperture</strong></li>
+                    <li><strong>Shutter Speed</strong></li>
+                    <li><strong>ISO</strong></li>
+                </ul>
+            </p>
+            <p class="fs-5">
+                Together, these three form the <strong>Exposure Triangle</strong>. Changing one will affect the others. Understanding how they work helps you take sharper, brighter, or more creative photos.
+            </p>
+        </div>
+
+        <div class="col-md-4 text-center">
+            <img src="{{ url_for('static', filename='images/img_learn_2_1.png') }}" alt="Exposure Triangle Diagram" class="img-fluid rounded">
+        </div>
+    </div>
+
+    <div style="position: absolute; bottom: 0; right: 0; padding: 50px;">
+        <a href="/learn/2" class="btn btn-primary btn-lg">LEARN APERTURE</a>
+    </div>
+</div>
+{% endblock %}

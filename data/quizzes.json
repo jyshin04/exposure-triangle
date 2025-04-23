@@ -1,0 +1,163 @@
+{
+    "questions": [
+      {
+        "id": 1,
+        "type": "aperture_match",
+        "template": "quiz_aperture.html",
+        "title": "Aperture Match Time!",
+        "data": {
+          "instruction": "Drag the correct f-number...",
+          "options": ["f/2.0", "f/16"],
+          "images": [
+            {
+              "src": "shallow-dof.jpg",
+              "correct_answer": "f/2.0"
+            },
+            {
+              "src": "deep-dof.jpg", 
+              "correct_answer": "f/16"
+            }
+          ]
+        }
+      },
+      {
+        "id": 2,
+        "type": "sort_aperture",
+        "template": "sort_aperture.html",
+        "title": "Sort the Apertures!",
+        "data": {
+          "instruction": "Drag the images to sort them from highest f-number (smallest aperture) to lowest f-number (largest aperture).",
+          "images": [
+            {
+              "src": "aperture-f16.jpg",
+              "f_value": 16.0
+            },
+            {
+              "src": "aperture-f8.jpg",
+              "f_value": 8.0
+            },
+            {
+              "src": "aperture-f4.jpg",
+              "f_value": 4.0
+            },
+            {
+              "src": "aperture-f2.jpg",
+              "f_value": 2.0
+            }
+          ]
+        }
+      },
+
+      {
+        "id": 3,
+        "type": "shutter_adjust",
+        "template": "shutter_adjust_1.html",
+        "title": "Shutter Speed Adjusting Time!",
+        "data": {
+          "instruction": "You want to capture a sharp photo of a cyclist, without motion blur like the photo below. Should you increase or decrease the shutter speed?",
+          "image": "cyclist-blur.jpg",
+          "current_speed": "1/60",
+          "correct_action": "increase",
+          "feedback": {
+            "correct": "Correct! A faster shutter speed (like 1/500) will freeze the motion of the cyclist.",
+            "incorrect": "Not quite. To freeze motion, you need a faster shutter speed."
+          }
+        }
+      },
+
+      {
+        "id": 4,
+        "type": "shutter_adjust",
+        "template": "shutter_adjust_2.html",
+        "title": "Shutter Speed Adjusting Time!",
+        "data": {
+          "instruction": "You want to capture the face of the person which is currently too dark. Should you increase or decrease the shutter speed?",
+          "image": "face.jpg",
+          "current_speed": "1/250",
+          "correct_action": "decrease",
+          "feedback": {
+            "correct": "Correct! A lower shutter speed lets in more light.",
+            "incorrect": "Not quite. A lower shutter speed lets in more light."
+          }
+        }
+      },
+      {
+        "id": 5,
+        "type": "sort_shutter",
+        "template": "sort_shutter_speed.html",
+        "title": "Sort the Shutter Speeds!",
+        "data": {
+            "instruction": "Drag the images to sort them from fastest shutter speed (freezes motion) to slowest shutter speed (shows motion blur).",
+            "images": [
+                {
+                    "src": "shutter-1000.jpg",
+                    "speed_value": 1000,
+                    "description": "1/1000s - Freezes fast action"
+                },
+                {
+                    "src": "shutter-250.jpg",
+                    "speed_value": 250,
+                    "description": "1/250s - Good for walking"
+                },
+                {
+                    "src": "shutter-60.jpg", 
+                    "speed_value": 60,
+                    "description": "1/60s - May show slight blur"
+                },
+                {
+                    "src": "shutter-15.jpg",
+                    "speed_value": 15,
+                    "description": "1/15s - Shows motion blur"
+                }
+            ]
+        }
+    },
+    {
+      "id": 6,
+      "type": "iso_match",
+      "template": "quiz_iso.html",
+      "title": "ISO Match Time!",
+      "data": {
+        "instruction": "Drag the correct ISO label onto the image that was taken with that ISO.",
+        "options": ["100", "1600"],
+        "images": [
+          {
+            "src": "iso100.jpg",
+            "correct_answer": "100"
+          },
+          {
+            "src": "iso1600.jpg", 
+            "correct_answer": "1600"
+          }
+        ]
+      }
+    },
+    {
+      "id": 7,
+      "type": "sort_iso",
+      "template": "sort_iso.html",
+      "title": "Sort the ISOs!",
+      "data": {
+        "instruction": "Drag the images to sort them from highest ISO to lowest ISO.",
+        "images": [
+          {
+            "src": "aperture-f16.jpg",
+            "iso": 1600
+          },
+          {
+            "src": "aperture-f8.jpg",
+            "iso": 1000
+          },
+          {
+            "src": "aperture-f4.jpg",
+            "iso": 500
+          },
+          {
+            "src": "aperture-f2.jpg",
+            "iso": 100
+          }
+        ]
+      }
+    }
+    ]
+  }

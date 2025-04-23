@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="quiz-container">
+    <h2>{{ question.title }}</h2>
+    <p class="instructions">{{ question.data.instruction }}</p>
+
+    <div class="sortable-container" id="sortable-list">
+        {% for image in question.data.images %}
+        <div class="sortable-item" data-value="{{ image.speed_value }}">
+            <img src="{{ url_for('static', filename='images/' + image.src) }}"
+                 class="quiz-image img-fluid"
+                 alt="{{ image.description }}">
+            <div class="speed-label">{{ image.description }}</div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <button class="btn btn-black mt-4" onclick="checkOrder()">Check Answer</button>
+
+    <div id="feedback-container" style="display:none;">
+        <h3 id="feedback-title"></h3>
+        <p id="feedback-message"></p>
+    </div>
+
+    <div class="navigation mt-4">
+        <a href="{{ url_for('show_quiz', question_id=6) }}" 
+           class="btn btn-black" 
+           id="next-btn" 
+           style="display:none;">
+            {% if next_id %}NEXT LESSON{% else %}SEE RESULTS{% endif %}
+        </a>
+    </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/sort_shutter_speeds.js') }}"></script>
+
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="quiz-container">
+   
+
+    <h2>{{ question.title }}</h2>
+    <p class="instructions">{{ question.data.instruction }}</p>
+    
+    <div class="row mt-4">
+        <!-- Images with drop zones -->
+        <div class="col-md-6">
+            {% for image in question.data.images %}
+            <div class="image-box mb-4">
+                <img src="{{ url_for('static', filename='images/' + image.src) }}" 
+                     class="quiz-image img-fluid"
+                     alt="Sample photo">
+                <div class="drop-zone" 
+                     data-correct="{{ image.correct_answer }}"
+                     id="drop-{{ loop.index }}">
+                    <span class="placeholder">Drop f-number here</span>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <!-- Draggable options -->
+        <div class="col-md-6">
+            <div class="draggable-options">
+                {% for option in question.data.options %}
+                <div class="draggable" 
+                     draggable="true" 
+                     data-value="{{ option }}"
+                     id="drag-{{ loop.index }}">
+                    {{ option }}
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    
+    <!-- Feedback container (initially hidden) -->
+    <div id="feedback-container" style="display: none;">
+        <h3 id="feedback-title"></h3>
+        <p id="feedback-message"></p>
+    </div>
+    
+    <div class="navigation mt-4">
+        <a href="{{ url_for('show_quiz', question_id=next_id) if next_id else url_for('results') }}" 
+           class="btn btn-black" 
+           id="next-btn" 
+           style="display:none;">
+            NEXT
+        </a>
+    </div>
+
+</div>
+
+<script src="{{ url_for('static', filename='js/quiz_aperture.js') }}"></script>
+
+{% endblock %}
