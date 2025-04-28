@@ -87,22 +87,22 @@
         "template": "sort_shutter_speed.html",
         "title": "Sort the Shutter Speeds!",
         "data": {
-            "instruction": "Drag the images to sort them from fastest shutter speed (freezes motion) to slowest shutter speed (shows motion blur).",
+            "instruction": "Drag the images to sort them from slowest shutter speed (shows motion blur) to fastest shutter speed (freezes motion).",
             "images": [
                 {
                     "src": "shutter-1000.png",
                     "speed_value": 1000,
-                    "description": "1/1000s - Freezes fast action"
+                    "description": "1/1000"
                 },
                 {
                     "src": "shutter-250.png",
                     "speed_value": 250,
-                    "description": "1/250s - Good for walking"
+                    "description": "1/250"
                 },
                 {
                     "src": "shutter-60.png", 
                     "speed_value": 60,
-                    "description": "1/60s - May show slight blur"
+                    "description": "1/60"
                 }
             ]
         }

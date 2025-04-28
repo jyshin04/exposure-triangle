@@ -1,41 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const sortableContainer = document.getElementById("sortable-list");
-    let dragging;
-
-    sortableContainer.addEventListener("dragstart", (e) => {
-        if (e.target.classList.contains("sortable-item")) {
-            dragging = e.target;
-            e.dataTransfer.effectAllowed = "move";
-        }
-    });
-
-    sortableContainer.addEventListener("dragover", (e) => {
-        e.preventDefault();
-        const afterElement = getDragAfterElement(sortableContainer, e.clientY);
-        if (afterElement == null) {
-            sortableContainer.appendChild(dragging);
-        } else {
-            sortableContainer.insertBefore(dragging, afterElement);
-        }
-    });
-
-    function getDragAfterElement(container, y) {
-        const items = [...container.querySelectorAll(".sortable-item:not(.dragging)")];
-        return items.reduce((closest, child) => {
-            const box = child.getBoundingClientRect();
-            const offset = y - box.top - box.height / 2;
-            if (offset < 0 && offset > closest.offset) {
-                return { offset: offset, element: child };
-            } else {
-                return closest;
-            }
-        }, { offset: Number.NEGATIVE_INFINITY }).element;
-    }
-
-    document.querySelectorAll(".sortable-item").forEach(item => {
-        item.setAttribute("draggable", "true");
-        item.addEventListener("dragstart", () => item.classList.add("dragging"));
-        item.addEventListener("dragend", () => item.classList.remove("dragging"));
+    // Initialize SortableJS for better drag-and-drop
+    new Sortable(document.getElementById("sortable-list"), {
+        animation: 150,
+        ghostClass: 'sortable-ghost',
+        dragClass: 'sortable-drag',
     });
 });
 
