@@ -33,6 +33,61 @@
 
     <main class="flex-grow-1">
         <div class="container py-5">
+            <!-- Progress bar - hidden on home and finish pages -->
+            {% if request.path != '/' and request.path != '/finish' %}
+                {% set total_pages = 15 %}
+                {% set current_page = namespace(value=0) %}
+                
+                {# Map each URL path to its corresponding position in the journey #}
+                {% if request.path == '/start' or request.path == '/learn/1' %}
+                    {% set current_page.value = 1 %}
+                {% elif request.path == '/learn/2' %}
+                    {% set current_page.value = 2 %}
+                {% elif request.path == '/learn/3' %}
+                    {% set current_page.value = 3 %}
+                {% elif request.path == '/learn/4' %}
+                    {% set current_page.value = 4 %}
+                {% elif request.path == '/quiz/1' %}
+                    {% set current_page.value = 5 %}
+                {% elif request.path == '/quiz/2' or '/sort_aperture' in request.path %}
+                    {% set current_page.value = 6 %}
+                {% elif request.path == '/learn/5' %}
+                    {% set current_page.value = 7 %}
+                {% elif request.path == '/learn/6' %}
+                    {% set current_page.value = 8 %}
+                {% elif request.path == '/quiz/3' or '/shutter_adjust_1' in request.path %}
+                    {% set current_page.value = 9 %}
+                {% elif request.path == '/quiz/4' or '/shutter_adjust_2' in request.path %}
+                    {% set current_page.value = 10 %}
+                {% elif request.path == '/quiz/5' or '/sort_shutter_speed' in request.path %}
+                    {% set current_page.value = 11 %}
+                {% elif request.path == '/learn/7' %}
+                    {% set current_page.value = 12 %}
+                {% elif request.path == '/learn/8' %}
+                    {% set current_page.value = 13 %}
+                {% elif request.path == '/quiz/6' or '/quiz_iso' in request.path %}
+                    {% set current_page.value = 14 %}
+                {% elif request.path == '/quiz/7' or '/sort_iso' in request.path %}
+                    {% set current_page.value = 15 %}
+                {% elif request.path == '/learn/9' %}
+                    {% set current_page.value = 16 %}
+                {% elif request.path == '/learn/10' %}
+                    {% set current_page.value = 17 %}
+                {% elif request.path == '/learn/11' %}
+                    {% set current_page.value = 18 %}
+                {% endif %}
+                
+                {% set progress_percent = (current_page.value / 18) * 100 %}
+                
+                <div class="progress mb-4" style="height: 10px;">
+                    <div class="progress-bar bg-success" style="width: {{ progress_percent|int }}%"></div>
+                </div>
+                
+                <div class="text-center mb-4">
+                    <small class="text-muted">Progress: {{ current_page.value }} of 18</small>
+                </div>
+            {% endif %}
+            
             <!-- Flash messages -->
             {% with messages = get_flashed_messages() %}
                 {% if messages %}
@@ -44,8 +99,18 @@
                 {% endif %}
             {% endwith %}
             
-            <!-- Main content block -->
-            {% block content %}{% endblock %}
+            <!-- Main content block with back button wrapper -->
+            <div class="position-relative" style="min-height: 80vh;">
+                {% if request.path != '/' and request.path != '/finish' %}
+                    <div style="position: absolute; bottom: 0; left: 0; padding: 50px;">
+                        <a href="javascript:history.back()" class="btn btn-outline-secondary btn-lg">
+                            <i class="bi bi-arrow-left"></i> BACK
+                        </a>
+                    </div>
+                {% endif %}
+                
+                {% block content %}{% endblock %}
+            </div>
         </div>
     </main>
 

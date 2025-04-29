@@ -8,6 +8,11 @@ app = Flask(__name__)
 
 app.secret_key = secrets.token_hex(32)
 
+# Make request object available in templates
+@app.context_processor
+def inject_request():
+    return {'request': request}
+
 def log_access(page_name):
     if 'page_access_log' not in session:
         session['page_access_log'] = {}
