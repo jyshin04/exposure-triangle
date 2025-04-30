@@ -417,3 +417,11 @@ li:before {
 .fa-circle-chevron-right {
     color: var(--primary-color) !important;
 }
+ul {
+    list-style-type: none; /* Hides default bullets */
+}
+
+ul li::before {
+    content: "•";
+    padding-right: 0.5em;
+}
