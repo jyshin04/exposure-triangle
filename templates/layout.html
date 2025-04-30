@@ -9,33 +9,34 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     
     <!-- Custom CSS -->
-    <link href = "exposure-triangle/static/css/style.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
 </head>
 <body class="d-flex flex-column min-vh-100">
 
+    <!-- Navigation with progress bar -->
     <nav class="header-nav navbar navbar-expand-lg">
         <div class="container">
-            <a class="navbar-brand nav-brand" href="/">Exposure Triangle</a>
+            <!-- Left-aligned back button -->
+            {% if request.path != '/' and ('/learn/' in request.path or request.path == '/start') %}
+                <a class="nav-link" href="/">
+                    BACK TO HOME
+                </a>
+            {% else %}
+                <a class="nav-link" href="/">
+                    Home
+                </a>
+            {% endif %}
             
-            <div class="ml-auto">
-                <div class="d-flex align-items-center">
-                    <a href="/start" class="nav-link">LEARN</a>
-                    <a href="#play" class="nav-link">PLAY</a>
-                </div>
-            </div>
-        </div>
-    </nav>
-
-
-    <main class="flex-grow-1">
-        <div class="container py-5">
-            <!-- Progress bar - hidden on home and finish pages -->
+            <!-- Center-aligned progress indicator -->
             {% if request.path != '/' and request.path != '/finish' %}
-                {% set total_pages = 15 %}
+                {% set total_pages = 18 %}
                 {% set current_page = namespace(value=0) %}
                 
                 {# Map each URL path to its corresponding position in the journey #}
@@ -77,17 +78,39 @@
                     {% set current_page.value = 18 %}
                 {% endif %}
                 
-                {% set progress_percent = (current_page.value / 18) * 100 %}
+                {% set progress_percent = (current_page.value / total_pages) * 100 %}
                 
-                <div class="progress mb-4" style="height: 10px;">
-                    <div class="progress-bar bg-success" style="width: {{ progress_percent|int }}%"></div>
-                </div>
-                
-                <div class="text-center mb-4">
-                    <small class="text-muted">Progress: {{ current_page.value }} of 18</small>
+                <div class="mx-auto text-center">
+                    <div class="d-flex align-items-center">  <!-- Changed from flex-column to align-items-center -->
+                        <div class="progress mb-1" style="height: 16px; width: 350px; color: white">
+                            <div class="progress-bar bg-success" style="width: {{ progress_percent|int }}%"></div>
+                        </div>
+                        <small class="text-progress ms-3">{{ current_page.value }}/18</small>  <!-- Added ms-3 for left margin -->
+                    </div>
                 </div>
             {% endif %}
             
+            <!-- Right-aligned navigation links -->
+            <div class="ml-auto">
+                <div class="d-flex align-items-center">
+                    {% if '/start' in request.path %}
+                        <a href="/quiz/1" class="nav-link">QUIZ</a>
+                    {% elif '/learn/' in request.path %}
+                    <a href="/quiz/1" class="nav-link">QUIZ</a>
+                    {% elif '/quiz/' in request.path %}
+                        <a href="/learn/1" class="nav-link">LEARN</a>
+                    {% elif '/' in request.path %}
+                    <a href="/learn/1" class="nav-link">LEARN</a>
+                    <a href="/quiz/1" class="nav-link">QUIZ</a>
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="flex-grow-1">
+        <div class="container py-5">
             <!-- Flash messages -->
             {% with messages = get_flashed_messages() %}
                 {% if messages %}
@@ -101,13 +124,7 @@
             
             <!-- Main content block with back button wrapper -->
             <div class="position-relative" style="min-height: 80vh;">
-                {% if request.path != '/' and request.path != '/finish' %}
-                    <div style="position: absolute; bottom: 0; left: 0; padding: 50px;">
-                        <a href="javascript:history.back()" class="btn btn-outline-secondary btn-lg">
-                            <i class="bi bi-arrow-left"></i> BACK
-                        </a>
-                    </div>
-                {% endif %}
+                
                 
                 {% block content %}{% endblock %}
             </div>

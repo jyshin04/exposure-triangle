@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 {% block content %}
-<div class="position-relative" style="min-height: 80vh;">
-    <div class="row align-items-center">
+<div class="d-flex flex-column" style="min-height: 80vh;">
+    <div class="row align-items-center flex-grow-1">
         <div class="col-md-8">
             <h2 class="camera-basics-heading mb-5">What is the Exposure Triangle?</h2>
             <p class="fs-5">
@@ -10,9 +10,27 @@
             <p class="fs-5">
                 This is done using <strong>three settings:</strong>
                 <ul class="fs-5">
-                    <li><strong>Aperture</strong></li>
-                    <li><strong>Shutter Speed</strong></li>
-                    <li><strong>ISO</strong></li>
+                    <li class="d-flex align-items-center">
+                        <strong>Aperture</strong>
+                        <img src="https://github.com/jyshin04/exposure-triangle/blob/main/static/images/Home%20aperture%20icon.png?raw=true" 
+                             alt="Aperture Icon" 
+                             class="ms-2"
+                             style="width: 32px; height: 32px;">
+                    </li>
+                    <li class="d-flex align-items-center">
+                        <strong>Shutter Speed</strong>
+                        <img src="https://github.com/jyshin04/exposure-triangle/blob/main/static/images/Home%20shutter%20speed%20icon.png?raw=true" 
+                             alt="Shutter Speed Icon" 
+                             class="ms-2"
+                             style="width: 32px; height: 32px;">
+                    </li>
+                    <li class="d-flex align-items-center">
+                        <strong>ISO</strong>
+                        <img src="https://github.com/jyshin04/exposure-triangle/blob/main/static/images/Home%20ISO%20icon.png?raw=true" 
+                             alt="ISO Icon" 
+                             class="ms-2"
+                             style="width: 32px; height: 32px;">
+                    </li>
                 </ul>
             </p>
             <p class="fs-5">
@@ -21,12 +39,19 @@
         </div>
 
         <div class="col-md-4 text-center">
-            <img src="{{ url_for('static', filename='images/img_learn_2_1.png') }}" alt="Exposure Triangle Diagram" class="img-fluid rounded">
+            <img src="https://github.com/jyshin04/exposure-triangle/blob/main/static/images/Learn%20exposure%20triangle.png?raw=true" alt="Exposure Triangle Diagram" class="img-fluid">
         </div>
     </div>
 
-    <div style="position: absolute; bottom: 0; right: 0; padding: 50px;">
-        <a href="/learn/2" class="btn btn-primary btn-lg">LEARN APERTURE</a>
+    <!-- Button container at the bottom -->
+    <div class="d-flex justify-content-between align-items-end mt-auto py-3">
+        <a href="/" class="btn btn-outline-secondary btn-lg">
+            BACK
+        </a>
+        
+        <a href="/learn/2" class="btn btn-primary btn-lg">
+            LEARN APERTURE <i class="fa-solid fa-circle-chevron-right ms-2"></i>
+        </a>
     </div>
 </div>
 {% endblock %}

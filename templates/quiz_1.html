@@ -46,15 +46,19 @@
         <p id="feedback-message"></p>
     </div>
     
-    <div class="navigation mt-4">
+
+    <div class="d-flex justify-content-between align-items-end mt-auto py-3">
+
+        <div></div>
         <a href="{{ url_for('show_quiz', question_id=next_id) if next_id else url_for('results') }}" 
-           class="btn btn-black" 
+           class="btn btn-primary btn-lg" 
            id="next-btn" 
            style="display:none;">
             NEXT
         </a>
     </div>
-
+    
+    
 </div>
 
 <script src="{{ url_for('static', filename='js/quiz_aperture.js') }}"></script>

@@ -3,7 +3,7 @@
       {
         "id": 1,
         "type": "aperture_match",
-        "template": "quiz_aperture.html",
+        "template": "quiz_1.html",
         "title": "Aperture Match Time!",
         "data": {
           "instruction": "Drag the correct f-number...",
@@ -23,7 +23,7 @@
       {
         "id": 2,
         "type": "sort_aperture",
-        "template": "sort_aperture.html",
+        "template": "quiz_2.html",
         "title": "Sort the Apertures!",
         "data": {
           "instruction": "Drag the images to sort them from highest f-number (smallest aperture) to lowest f-number (largest aperture).",
