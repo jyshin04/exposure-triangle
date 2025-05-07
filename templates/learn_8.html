@@ -8,8 +8,8 @@
 
     <div class="row align-items-center">
         <div class="col-md-6 text-center">
-            <img id="ISO-img"
-     src="{{ url_for('static', filename='images/iso_demo.png') }}"
+            <img id="iso-img"
+     src="{{ url_for('static', filename='images/ISO_100_quiz.png') }}"
      alt="ISO Demo" 
      class="img-fluid rounded">
         </div>
@@ -17,7 +17,7 @@
         <div class="col-md-6 text-center">
             <label for="isoSlider" class="form-label fw-bold fs-5">ISO</label>
             <input type="range" min="1" max="4" value="1" class="form-range w-75 mx-auto" id="isoSlider">
-            <p id="isoValue" class="mt-2 fs-5">300</p>
+            <p id="isoValue" class="mt-2 fs-5">100</p>
         </div>
     </div>
 
@@ -35,19 +35,19 @@
 
 {% block scripts %}
 <script>
-    const slider = document.getElementById("apertureSlider");
-    const image = document.getElementById("aperture-img");
-    const valueText = document.getElementById("apertureValue");
+    const slider = document.getElementById("isoSlider");
+    const image = document.getElementById("iso-img");
+    const valueText = document.getElementById("isoValue");
 
-    const apertures = {
-        1: { value: "f/2.8", src: "{{ url_for('static', filename='images/img_learn_5_1.png') }}" },
-        2: { value: "f/5.6", src: "{{ url_for('static', filename='images/img_learn_5_2.png') }}" },
-        3: { value: "f/8",   src: "{{ url_for('static', filename='images/img_learn_5_3.png') }}" },
-        4: { value: "f/16",  src: "{{ url_for('static', filename='images/img_learn_5_4.png') }}" }
+    const iso = {
+        1: { value: "100", src: "{{ url_for('static', filename='images/ISO_100_quiz.png') }}" },
+        2: { value: "200", src: "{{ url_for('static', filename='images/ISO_200_quiz.png') }}" },
+        3: { value: "400", src: "{{ url_for('static', filename='images/ISO_400_quiz.png') }}" },
+        4: { value: "800", src: "{{ url_for('static', filename='images/ISO_800_quiz.png') }}" }
     };
 
     slider.addEventListener("input", function () {
-        const setting = apertures[this.value];
+        const setting = iso[this.value];
         image.src = setting.src;
         valueText.textContent = setting.value;
     });
