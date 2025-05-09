@@ -23,10 +23,14 @@ function checkOrder() {
     if (isCorrect) {
         title.textContent = "Correct!";
         message.textContent = "You've successfully sorted the shutter speed from highest to lowest.";
+        feedback.style.backgroundColor = 'rgba(40, 167, 69, 0.1)';
+        feedback.style.borderColor = '#28a745';
         nextBtn.style.display = "inline-block";
     } else {
         title.textContent = "Incorrect.";
         message.textContent = "The order isn't quite right. ";
+        feedback.style.backgroundColor = 'rgba(220, 53, 69, 0.1)';
+        feedback.style.borderColor = '#dc3545';
         nextBtn.style.display = "inline-block";
     }
 
