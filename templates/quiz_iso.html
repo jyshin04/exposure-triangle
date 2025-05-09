@@ -8,36 +8,36 @@
     <p class="instructions">{{ question.data.instruction }}</p>
     
     <div class="row mt-4">
-        <!-- Images with drop zones -->
-        <div class="col-md-6">
-            {% for image in question.data.images %}
-            <div class="image-box mb-4">
-                <img src="{{ url_for('static', filename='images/' + image.src) }}" 
-                     class="quiz-image img-fluid"
-                     alt="Sample photo">
-                <div class="drop-zone" 
-                     data-correct="{{ image.correct_answer }}"
-                     id="drop-{{ loop.index }}">
-                    <span class="placeholder">Drop f-number here</span>
-                </div>
+    <!-- Images with drop zones -->
+    <div class="col-md-6">
+    <div class="image-row">
+        {% for image in question.data.images %}
+        <div class="image-box">
+            <img src="{{ url_for('static', filename='images/' + image.src) }}" 
+                 class="quiz-image"
+                 alt="Sample photo">
+            <div class="drop-zone" 
+                 data-correct="{{ image.correct_answer }}"
+                 id="drop-{{ loop.index }}">
+                <span class="placeholder">Drop f-number here</span>
             </div>
-            {% endfor %}
         </div>
-        
-        <!-- Draggable options -->
-        <div class="col-md-6">
+        {% endfor %}
+    </div>
+</div>
+    <!-- Draggable options -->
+    <div class="col-md-6">
+        <div class="draggable-options-box">
             <div class="draggable-options">
                 {% for option in question.data.options %}
-                <div class="draggable" 
-                     draggable="true" 
-                     data-value="{{ option }}"
-                     id="drag-{{ loop.index }}">
-                    {{ option }}
-                </div>
+                <div class="draggable-box draggable" draggable="true" data-value="{{ option }}" id="drag-{{ loop.index }}">
+    {{ option }}
+</div>
                 {% endfor %}
             </div>
         </div>
     </div>
+</div>
     
     <!-- Feedback container (initially hidden) -->
     <div id="feedback-container" style="display: none;">
