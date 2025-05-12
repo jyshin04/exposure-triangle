@@ -39,19 +39,21 @@
     </div>
 
         
-    <div class="d-flex align-items-center mt-auto py-3" style="width:100%;">
-        <div id="feedback-container" class="feedback" style="display: none;">
-          <h3 id="feedback-title"></h3>
-          <p id="feedback-message"></p>
-        </div>
-        <a href="{{ url_for('show_quiz', question_id=next_id) if next_id else url_for('results') }}"
-           id="next-btn"
-           class="btn btn-primary btn-lg ms-auto"
+    <div id="feedback-container" class="feedback" style="display: none;">
+        <h3 id="feedback-title"></h3>
+        <p id="feedback-message"></p>
+    </div>
+    
+    <div class="d-flex justify-content-between align-items-end mt-auto py-3">
+
+        <div></div>
+        <a href="{{ url_for('show_quiz', question_id=next_id) if next_id else url_for('results') }}" 
+           class="btn btn-primary btn-lg" 
+           id="next-btn" 
            style="display:none;">
-          NEXT
+            NEXT
         </a>
-      </div>
-      
+    </div>
 </div>
 
 <style>
