@@ -109,6 +109,7 @@
     const userImage = document.getElementById("userImage");
     const feedbackDiv = document.getElementById("feedback");
     const checkButton = document.getElementById("checkButton");
+    const nextBtn = document.getElementById("next-btn");
 
     // Goal settings
     const goalISO = document.getElementById("goalISO").value;
@@ -138,17 +139,15 @@
         
         if (userISO === goalISO && userShutter === goalShutter && userAperture === goalAperture) {
             feedbackDiv.innerHTML = `<div class="alert alert-success">Perfect match! 🎉</div>`;
-            checkButton.classList.remove("btn-success");
-            checkButton.classList.add("btn-secondary");
-            checkButton.disabled = true;
         } else {
-            let feedback = [];
-            if (userISO !== goalISO) feedback.push("ISO doesn't match");
-            if (userShutter !== goalShutter) feedback.push("Shutter speed doesn't match");
-            if (userAperture !== goalAperture) feedback.push("Aperture doesn't match");
-            
-            feedbackDiv.innerHTML = `<div class="alert alert-warning">${feedback.join(", ")}. Keep trying!</div>`;
+            feedbackDiv.innerHTML = `<div class="alert alert-warning">Not quite right! Let's move on.</div>`;
         }
+        
+        // Disable the check button and show the finish button
+        checkButton.disabled = true;
+        checkButton.classList.remove("btn-success");
+        checkButton.classList.add("btn-secondary");
+        nextBtn.style.display = "block";
     }
 
     // Add event listeners
