@@ -487,9 +487,9 @@ li:before {
     margin: 2rem auto;
     padding: 1.5rem;
     border-radius: 8px;
-    max-width: 600px;
+    max-width: 50%;
     text-align: center;
-    display: none;
+    display: inline-block;
 }
 
 .feedback.correct {

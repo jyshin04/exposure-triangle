@@ -6,7 +6,7 @@
         <p class="fs-5">Adjust the sliders to match your image with the goal image.</p>
     </div>
     <div class="mt-4 row align-items-start g-4">
-        <!-- Images Column - Now side by side -->
+        <!-- Images Column -->
         <div class="col-md-6">
             <div class="row">
                 <!-- Goal Image -->
@@ -25,15 +25,13 @@
                          src="{{ url_for('static', filename='images/play-triple-slider/200_1_15_4.jpg') }}"
                          alt="Your Exposure" 
                          class="img-fluid rounded shadow">
-                    <div id="feedback" class="mt-2"></div>
                 </div>
             </div>
         </div>
 
-        <!-- Sliders Column (unchanged) -->
+        <!-- Sliders Column -->
         <div class="col-md-6">
             <div class="d-flex flex-column gap-4">
-                <!-- ISO Slider -->
                 <div class="text-center">
                     <label for="isoSlider" class="form-label fw-bold fs-5">ISO</label>
                     <input type="range" min="1" max="3" value="1" step="1"
@@ -41,7 +39,6 @@
                     <p id="isoValue" class="mt-2 fs-5 mb-0">200</p>
                 </div>
 
-                <!-- Shutter Speed Slider -->
                 <div class="text-center">
                     <label for="shutterSlider" class="form-label fw-bold fs-5">Shutter Speed</label>
                     <input type="range" min="1" max="3" value="1" step="1"
@@ -49,7 +46,6 @@
                     <p id="shutterValue" class="mt-2 fs-5 mb-0">1/15</p>
                 </div>
 
-                <!-- Aperture Slider -->
                 <div class="text-center">
                     <label for="apertureSlider" class="form-label fw-bold fs-5">Aperture</label>
                     <input type="range" min="1" max="3" value="1" step="1"
@@ -57,152 +53,110 @@
                     <p id="apertureValue" class="mt-2 fs-5 mb-0">f/4</p>
                 </div>
             </div>
-            
-            <!-- Hidden goal settings -->
+
+            <!-- Hidden Goal Settings -->
             <input type="hidden" id="goalISO" value="800">
             <input type="hidden" id="goalShutter" value="1_60">
             <input type="hidden" id="goalAperture" value="8">
         </div>
     </div>
+    <div id="feedback-container" class="feedback" style="display: none;">
+        <h3 id="feedback-title"></h3>
+        <p id="feedback-message"></p>
+    </div>
 
     <div class="d-flex justify-content-between align-items-end mt-auto py-3">
-        <button id="checkButton" class="btn btn-success btn-lg">
-            CHECK MATCH
-        </button>
-        <a href="/finish" 
-           class="btn btn-primary btn-lg" 
-           id="next-btn" 
-           style="display:none;">
-            FINISH
-        </a>
+        <button id="checkButton" class="btn btn-success btn-lg">CHECK MATCH</button>
+        <a href="/finish" class="btn btn-primary btn-lg" id="next-btn" style="display:none;">FINISH</a>
     </div>
 </div>
 {% endblock %}
 
 {% block scripts %}
 <script>
-    // Mapping for ISO values
-    const isoValues = {
-        1: "200",
-        2: "800",
-        3: "1600"
-    };
+    const isoValues = { 1: "200", 2: "800", 3: "1600" };
+    const shutterValues = { 1: "1_15", 2: "1_60", 3: "1_350" };
+    const apertureValues = { 1: "4", 2: "8", 3: "16" };
 
-    // Mapping for Shutter Speed values
-    const shutterValues = {
-        1: "1_15",
-        2: "1_60",
-        3: "1_350"
-    };
-
-    // Mapping for Aperture values
-    const apertureValues = {
-        1: "4",
-        2: "8",
-        3: "16"
-    };
-
-    // Get DOM elements
     const isoSlider = document.getElementById("isoSlider");
     const shutterSlider = document.getElementById("shutterSlider");
     const apertureSlider = document.getElementById("apertureSlider");
     const userImage = document.getElementById("userImage");
-    const feedbackDiv = document.getElementById("feedback");
+
+    const feedbackContainer = document.getElementById("feedback-container");
+    const feedbackTitle = document.getElementById("feedback-title");
+    const feedbackMessage = document.getElementById("feedback-message");
     const checkButton = document.getElementById("checkButton");
     const nextBtn = document.getElementById("next-btn");
 
-    // Goal settings
     const goalISO = document.getElementById("goalISO").value;
     const goalShutter = document.getElementById("goalShutter").value;
     const goalAperture = document.getElementById("goalAperture").value;
 
-    // Function to update the user's image
     function updateUserImage() {
         const iso = isoValues[isoSlider.value];
         const shutter = shutterValues[shutterSlider.value];
         const aperture = apertureValues[apertureSlider.value];
-        
-        // Update displayed values
+
         document.getElementById("isoValue").textContent = iso;
         document.getElementById("shutterValue").textContent = `1/${shutter.split('_')[1]}`;
         document.getElementById("apertureValue").textContent = `f/${aperture}`;
-        
-        // Update image source
+
         userImage.src = `{{ url_for('static', filename='images/play-triple-slider/') }}${iso}_${shutter}_${aperture}.jpg`;
     }
 
-<<<<<<< Updated upstream:templates/learn_11.html
-
-// Check the user's selection and send result
-function checkMatch() {
+    function checkMatch() {
     const userISO = isoValues[isoSlider.value];
     const userShutter = shutterValues[shutterSlider.value];
     const userAperture = apertureValues[apertureSlider.value];
 
-    const isCorrect =
-        userISO === goalISO &&
-        userShutter === goalShutter &&
-        userAperture === goalAperture;
+    const isoCorrect = userISO === goalISO;
+    const shutterCorrect = userShutter === goalShutter;
+    const apertureCorrect = userAperture === goalAperture;
 
-    // Feedback UI
+    const isCorrect = isoCorrect && shutterCorrect && apertureCorrect;
+
+    feedbackContainer.style.display = 'block';
+    feedbackContainer.classList.remove('correct', 'incorrect');
+
     if (isCorrect) {
-        feedbackDiv.innerHTML = `<div class="alert alert-success">Perfect match! 🎉</div>`;
-    } else {
-        feedbackDiv.innerHTML = `<div class="alert alert-warning">Not quite right! Let's move on.</div>`;
-=======
-    // Function to check if user matches the goal
-    function checkMatch() {
-        const userISO = isoValues[isoSlider.value];
-        const userShutter = shutterValues[shutterSlider.value];
-        const userAperture = apertureValues[apertureSlider.value];
-        
-        if (userISO === goalISO && userShutter === goalShutter && userAperture === goalAperture) {
-            feedbackDiv.innerHTML = `<div class="feedback">Perfect match! 🎉</div>`;
-        } else {
-            feedbackDiv.innerHTML = `<div class="feedback">Not quite right! Let's move on.</div>`;
-        }
-        
-        // Disable the check button and show the finish button
+        feedbackContainer.classList.add('correct');
+        feedbackTitle.textContent = 'Correct!';
+        feedbackMessage.textContent = 'Perfect match! 🎉';
         checkButton.disabled = true;
         checkButton.classList.remove("btn-success");
         checkButton.classList.add("btn-secondary");
         nextBtn.style.display = "block";
->>>>>>> Stashed changes:templates/quiz_8.html
+    } else {
+        feedbackContainer.classList.add('incorrect');
+        feedbackTitle.textContent = 'Incorrect.';
+
+        let messageParts = [];
+        messageParts.push(isoCorrect ? "✅ ISO is correct" : "❌ ISO is incorrect");
+        messageParts.push(shutterCorrect ? "✅ Shutter speed is correct" : "❌ Shutter speed is incorrect");
+        messageParts.push(apertureCorrect ? "✅ Aperture is correct" : "❌ Aperture is incorrect");
+
+        feedbackMessage.innerHTML = messageParts.join("<br>");
     }
 
-    checkButton.disabled = true;
-    checkButton.classList.remove("btn-success");
-    checkButton.classList.add("btn-secondary");
-    nextBtn.style.display = "block";
-
-    // ✅ Send to Flask using same /save_quiz_result route
     fetch("/save_quiz_result", {
         method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-            question_id: "triple_slider", // or use a dynamic ID if needed
+            question_id: "triple_slider",
             correct: isCorrect
         })
     })
     .then(response => response.json())
-    .then(data => {
-        console.log("Result saved:", data);
-    })
-    .catch(error => {
-        console.error("Error saving result:", error);
-    });
+    .then(data => console.log("Result saved:", data))
+    .catch(error => console.error("Error saving result:", error));
 }
 
-// Attach listeners
-[isoSlider, shutterSlider, apertureSlider].forEach(slider => {
-    slider.addEventListener("input", updateUserImage);
-});
-checkButton.addEventListener("click", checkMatch);
 
-// Initialize on load
-document.addEventListener("DOMContentLoaded", updateUserImage);
-
+    [isoSlider, shutterSlider, apertureSlider].forEach(slider => {
+        slider.addEventListener("input", updateUserImage);
+    });
+    checkButton.addEventListener("click", checkMatch);
+    document.addEventListener("DOMContentLoaded", updateUserImage);
 </script>
 {% endblock %}
