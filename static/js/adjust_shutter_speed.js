@@ -39,6 +39,18 @@ document.addEventListener('DOMContentLoaded', function () {
             save_answer(isCorrect);
 
             feedbackContainer.style.display = 'block';
+
+            if (isCorrect) {
+                feedbackContainer.style.backgroundColor = 'rgba(40, 167, 69, 0.1)';
+                feedbackContainer.style.borderColor = '#28a745';
+                feedbackTitle.textContent = 'Correct!';
+                feedbackMessage.textContent = 'High ISO increases brightness but adds grain.';
+            } else {
+                feedbackContainer.style.backgroundColor = 'rgba(220, 53, 69, 0.1)';
+                feedbackContainer.style.borderColor = '#dc3545';
+                feedbackTitle.textContent = 'Incorrect';
+                feedbackMessage.textContent = 'Some matches are incorrect.';
+            }
             feedbackContainer.className = isCorrect ? 'feedback correct' : 'feedback incorrect';
             feedbackTitle.textContent = isCorrect ? 'Correct!' : 'Incorrect';
             feedbackMessage.textContent = isCorrect ? correctFeedback : incorrectFeedback;

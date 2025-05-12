@@ -494,12 +494,10 @@ li:before {
 
 .feedback.correct {
     background-color: rgba(40, 167, 69, 0.1);
-    border: 1px solid #28a745;
 }
 
 .feedback.incorrect {
     background-color: rgba(220, 53, 69, 0.1);
-    border: 1px solid #dc3545;
 }
 /* Animation Classes */
 .fade-in {
@@ -544,6 +542,14 @@ li:before {
 .quiz-image {
     max-height: 200px;
     width: 200px;
+    display: block;
+    margin: 0 12px 0 0;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+    object-fit: cover;
+}
+
+.inc-dec-image {
     display: block;
     margin: 0 12px 0 0;
     border-radius: 12px;
