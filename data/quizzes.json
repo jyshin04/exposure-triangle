@@ -87,7 +87,7 @@
         "template": "sort_shutter_speed.html",
         "title": "Sort the Shutter Speeds!",
         "data": {
-            "instruction": "Drag the images to sort them from slowest shutter speed (shows motion blur) to fastest shutter speed (freezes motion).",
+            "instruction": "Drag the images to sort them from low shutter speed (shows motion blur) to fast shutter speed (freezes motion).",
             "images": [
                 {
                     "src": "shutter-1000.png",
