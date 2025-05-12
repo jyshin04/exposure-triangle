@@ -138,7 +138,7 @@ document.addEventListener('DOMContentLoaded', function() {
             feedbackContainer.style.backgroundColor = 'rgba(220, 53, 69, 0.1)';
             feedbackContainer.style.borderColor = '#dc3545';
             feedbackTitle.textContent = 'Incorrect';
-            feedbackMessage.textContent = 'Some matches are incorrect.';
+            feedbackMessage.textContent = 'Remember, low f-numbers have blurry backgrounds and high f-numbers have sharp backgrounds.';
         }
     }
 

@@ -28,7 +28,7 @@ function checkOrder() {
         nextBtn.style.display = "inline-block";
     } else {
         title.textContent = "Incorrect.";
-        message.textContent = "The order isn't quite right. ";
+        message.textContent = "Remember, slowest shutter speed shows motion blur and fastest shutter speed freezes motion.";
         feedback.style.backgroundColor = 'rgba(220, 53, 69, 0.1)';
         feedback.style.borderColor = '#dc3545';
         nextBtn.style.display = "inline-block";
