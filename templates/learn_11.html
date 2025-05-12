@@ -131,33 +131,58 @@
         userImage.src = `{{ url_for('static', filename='images/play-triple-slider/') }}${iso}_${shutter}_${aperture}.jpg`;
     }
 
-    // Function to check if user matches the goal
-    function checkMatch() {
-        const userISO = isoValues[isoSlider.value];
-        const userShutter = shutterValues[shutterSlider.value];
-        const userAperture = apertureValues[apertureSlider.value];
-        
-        if (userISO === goalISO && userShutter === goalShutter && userAperture === goalAperture) {
-            feedbackDiv.innerHTML = `<div class="alert alert-success">Perfect match! 🎉</div>`;
-        } else {
-            feedbackDiv.innerHTML = `<div class="alert alert-warning">Not quite right! Let's move on.</div>`;
-        }
-        
-        // Disable the check button and show the finish button
-        checkButton.disabled = true;
-        checkButton.classList.remove("btn-success");
-        checkButton.classList.add("btn-secondary");
-        nextBtn.style.display = "block";
+
+// Check the user's selection and send result
+function checkMatch() {
+    const userISO = isoValues[isoSlider.value];
+    const userShutter = shutterValues[shutterSlider.value];
+    const userAperture = apertureValues[apertureSlider.value];
+
+    const isCorrect =
+        userISO === goalISO &&
+        userShutter === goalShutter &&
+        userAperture === goalAperture;
+
+    // Feedback UI
+    if (isCorrect) {
+        feedbackDiv.innerHTML = `<div class="alert alert-success">Perfect match! 🎉</div>`;
+    } else {
+        feedbackDiv.innerHTML = `<div class="alert alert-warning">Not quite right! Let's move on.</div>`;
     }
 
-    // Add event listeners
-    [isoSlider, shutterSlider, apertureSlider].forEach(slider => {
-        slider.addEventListener("input", updateUserImage);
-    });
-    
-    checkButton.addEventListener("click", checkMatch);
+    checkButton.disabled = true;
+    checkButton.classList.remove("btn-success");
+    checkButton.classList.add("btn-secondary");
+    nextBtn.style.display = "block";
 
-    // Initialize
-    updateUserImage();
+    // ✅ Send to Flask using same /save_quiz_result route
+    fetch("/save_quiz_result", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            question_id: "triple_slider", // or use a dynamic ID if needed
+            correct: isCorrect
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Result saved:", data);
+    })
+    .catch(error => {
+        console.error("Error saving result:", error);
+    });
+}
+
+// Attach listeners
+[isoSlider, shutterSlider, apertureSlider].forEach(slider => {
+    slider.addEventListener("input", updateUserImage);
+});
+checkButton.addEventListener("click", checkMatch);
+
+// Initialize on load
+document.addEventListener("DOMContentLoaded", updateUserImage);
+
 </script>
 {% endblock %}

@@ -48,7 +48,6 @@
                 '/learn/8': 8,
                 '/learn/9': 9,
                 '/learn/10': 10,
-                '/learn/11': 11
             } %}
             
             {% set quiz_pages = {
@@ -58,7 +57,8 @@
                 '/quiz/4': 4, '/shutter_adjust_2': 4,
                 '/quiz/5': 5, '/sort_shutter_speed': 5,
                 '/quiz/6': 6, '/quiz_iso': 6,
-                '/quiz/7': 7, '/sort_iso': 7
+                '/quiz/7': 7, '/sort_iso': 7,
+                '/quiz/8': 7, '/learn_11': 8
             } %}
             
             {% set path = request.path %}
@@ -66,23 +66,23 @@
             {% set current_quiz = quiz_pages[path] if path in quiz_pages else None %}
                 
             {% if current_learn %}
-  {% set progress_percent = (current_learn / 11) * 100 %}
+  {% set progress_percent = (current_learn / 10) * 100 %}
   <div class="mx-auto text-center">
       <div class="d-flex align-items-center">
           <div class="progress mb-1" style="height: 16px; width: 350px;">
               <div class="progress-bar bg-success" style="width: {{ progress_percent|int }}%"></div>
           </div>
-          <small class="text-progress ms-3">Lesson {{ current_learn }}/11</small>
+          <small class="text-progress ms-3">Lesson {{ current_learn }}/10</small>
       </div>
   </div>
 {% elif current_quiz %}
-  {% set progress_percent = (current_quiz / 7) * 100 %}
+  {% set progress_percent = (current_quiz / 8) * 100 %}
   <div class="mx-auto text-center">
       <div class="d-flex align-items-center">
           <div class="progress mb-1" style="height: 16px; width: 350px;">
               <div class="progress-bar bg-warning" style="width: {{ progress_percent|int }}%"></div>
           </div>
-          <small class="text-progress ms-3">Quiz {{ current_quiz }}/7</small>
+          <small class="text-progress ms-3">Quiz {{ current_quiz }}/8</small>
       </div>
   </div>
 {% endif %}
