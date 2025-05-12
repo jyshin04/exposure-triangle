@@ -22,13 +22,13 @@ function checkOrder() {
     feedback.style.display = "block";
     if (isCorrect) {
         title.textContent = "Correct!";
-        message.textContent = "You've successfully sorted the ISOs from lowest to highest.";
+        message.textContent = "You've successfully sorted the ISOs from highest to lowest.";
         feedback.style.backgroundColor = 'rgba(40, 167, 69, 0.1)';
         feedback.style.borderColor = '#28a745';
         nextBtn.style.display = "inline-block";
     } else {
         title.textContent = "Incorrect.";
-        message.textContent = "Remember, images with low ISO have less grain and images with high ISO have more grain.";
+        message.textContent = "Remember, images with low ISO have less light and images with high ISO have more light.";
         feedback.style.backgroundColor = 'rgba(220, 53, 69, 0.1)';
         feedback.style.borderColor = '#dc3545';
         nextBtn.style.display = "inline-block";
