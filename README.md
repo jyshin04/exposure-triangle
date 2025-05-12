@@ -28,7 +28,7 @@ The experience includes:
 1. Clone this repository:
 
    ```bash
-   git clone https://github.com/your-username/exposure-triangle.git
+   git clone https://github.com/jyshin04/exposure-triangle.git
    cd exposure-triangle
    ```
 2. Start the server:
@@ -46,7 +46,7 @@ The experience includes:
 
 ```
 exposure-triangle/
-├── data/               # (Optional) Data used for quizzes or lessons
+├── data/               # Data used for quizzes or lessons
 ├── static/             # Static files
 │   ├── css/            # Styling
 │   ├── images/         # Visual assets
