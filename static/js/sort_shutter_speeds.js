@@ -22,7 +22,7 @@ function checkOrder() {
     feedback.style.display = "block";
     if (isCorrect) {
         title.textContent = "Correct!";
-        message.textContent = "You've successfully sorted the shutter speed from highest to lowest.";
+        message.textContent = "You've successfully sorted the shutter speed from lowest to highest.";
         feedback.style.backgroundColor = 'rgba(40, 167, 69, 0.1)';
         feedback.style.borderColor = '#28a745';
         nextBtn.style.display = "inline-block";

@@ -136,7 +136,7 @@ document.addEventListener('DOMContentLoaded', function() {
             feedbackContainer.style.backgroundColor = 'rgba(40, 167, 69, 0.1)';
             feedbackContainer.style.borderColor = '#28a745';
             feedbackTitle.textContent = 'Correct!';
-            feedbackMessage.textContent = 'High ISO increases brightness but adds grain.';
+            feedbackMessage.textContent = 'High ISO increases brightness.';
         } else {
             feedbackContainer.style.backgroundColor = 'rgba(220, 53, 69, 0.1)';
             feedbackContainer.style.borderColor = '#dc3545';
