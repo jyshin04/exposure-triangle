@@ -25,7 +25,7 @@
     <nav class="header-nav navbar navbar-expand-lg">
         <div class="container">
             <!-- Left-aligned back button -->
-            {% if request.path != '/' and ('/learn/' in request.path or request.path == '/start') %}
+            {% if request.path != '/' %}
                 <a class="nav-link" href="/">
                     BACK TO HOME
                 </a>
@@ -37,7 +37,6 @@
             
             <!-- Center-aligned progress indicator -->
             {% set learn_pages = {
-                '/start': 1,
                 '/learn/1': 1,
                 '/learn/2': 2,
                 '/learn/3': 3,
@@ -52,13 +51,13 @@
             
             {% set quiz_pages = {
                 '/quiz/1': 1,
-                '/quiz/2': 2, '/sort_aperture': 2,
-                '/quiz/3': 3, '/shutter_adjust_1': 3,
-                '/quiz/4': 4, '/shutter_adjust_2': 4,
-                '/quiz/5': 5, '/sort_shutter_speed': 5,
-                '/quiz/6': 6, '/quiz_iso': 6,
-                '/quiz/7': 7, '/sort_iso': 7,
-                '/quiz/8': 7, '/learn_11': 8
+                '/quiz/2': 2, 
+                '/quiz/3': 3, 
+                '/quiz/4': 4, 
+                '/quiz/5': 5, 
+                '/quiz/6': 6, 
+                '/quiz/7': 7, 
+                '/quiz/8': 8, 
             } %}
             
             {% set path = request.path %}

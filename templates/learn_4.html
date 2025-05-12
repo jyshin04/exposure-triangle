@@ -1,24 +1,26 @@
 {% extends "layout.html" %}
 {% block content %}
 <div class="position-relative" style="min-height: 80vh;">
-    <div>
-        <h2 class="camera-basics-heading mb-5">Play with Aperture 🎮</h2>
+    
+        <div>
+        <h2 class="camera-basics-heading mb-5" style="margin-top: 5vh;">Play with Aperture 🎮</h2>
         <p class="fs-5">Use the slider below to see how aperture affects the image.</p>
-    </div>
-
-    <div class="row align-items-center">
-        <div class="col-md-6 text-center">
-            <img id="aperture-img" src="{{ url_for('static', filename='images/img_learn_5_1.png') }}" 
-                 class="img-fluid rounded" alt="Aperture Demo">
         </div>
 
-        <div class="col-md-6 text-center">
-            <label for="apertureSlider" class="form-label fw-bold fs-5">Aperture</label>
-            <input type="range" min="1" max="4" value="1" class="form-range w-75 mx-auto" id="apertureSlider">
-            <p id="apertureValue" class="mt-2 fs-5">f/2.8</p>
-        </div>
-    </div>
+        <div class="row align-items-center" style="min-height: auto;">
+            <div class="col-md-6 text-center">
+                <img id="aperture-img" src="{{ url_for('static', filename='images/img_learn_5_1.png') }}" 
+                    class="img-fluid rounded" alt="Aperture Demo">
+            </div>
+   
 
+            <div class="col-md-6 text-center">
+                <label for="apertureSlider" class="form-label fw-bold fs-5">Aperture</label>
+                <input type="range" min="1" max="4" value="1" class="form-range w-75 mx-auto" id="apertureSlider">
+                <p id="apertureValue" class="mt-2 fs-5">f/2.8</p>
+            </div>
+        </div>
+  
     <!-- Button container at the bottom -->
     <div class="d-flex justify-content-between align-items-end mt-auto py-3">
         <a href="/learn/3" class="btn btn-outline-secondary btn-lg">

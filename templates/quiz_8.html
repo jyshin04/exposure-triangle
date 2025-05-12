@@ -131,6 +131,7 @@
         userImage.src = `{{ url_for('static', filename='images/play-triple-slider/') }}${iso}_${shutter}_${aperture}.jpg`;
     }
 
+<<<<<<< Updated upstream:templates/learn_11.html
 
 // Check the user's selection and send result
 function checkMatch() {
@@ -148,6 +149,25 @@ function checkMatch() {
         feedbackDiv.innerHTML = `<div class="alert alert-success">Perfect match! 🎉</div>`;
     } else {
         feedbackDiv.innerHTML = `<div class="alert alert-warning">Not quite right! Let's move on.</div>`;
+=======
+    // Function to check if user matches the goal
+    function checkMatch() {
+        const userISO = isoValues[isoSlider.value];
+        const userShutter = shutterValues[shutterSlider.value];
+        const userAperture = apertureValues[apertureSlider.value];
+        
+        if (userISO === goalISO && userShutter === goalShutter && userAperture === goalAperture) {
+            feedbackDiv.innerHTML = `<div class="feedback">Perfect match! 🎉</div>`;
+        } else {
+            feedbackDiv.innerHTML = `<div class="feedback">Not quite right! Let's move on.</div>`;
+        }
+        
+        // Disable the check button and show the finish button
+        checkButton.disabled = true;
+        checkButton.classList.remove("btn-success");
+        checkButton.classList.add("btn-secondary");
+        nextBtn.style.display = "block";
+>>>>>>> Stashed changes:templates/quiz_8.html
     }
 
     checkButton.disabled = true;

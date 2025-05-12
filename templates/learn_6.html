@@ -2,11 +2,11 @@
 {% block content %}
 <div class="position-relative" style="min-height: 80vh;">
     <div>
-        <h2 class="camera-basics-heading mb-5">Play with Shutter Speed 🎮</h2>
+        <h2 class="camera-basics-heading mb-5" style="margin-top: 5vh;">Play with Shutter Speed 🎮</h2>
         <p class="fs-5">Use the slider below to see how shutter speed affects the image.</p>
     </div>
 
-    <div class="row align-items-center">
+    <div class="row align-items-center" style="min-height: auto;">
         <div class="col-md-6 text-center">
             <img id="shutter-img" src="{{ url_for('static', filename='images/img_learn_11_1.png') }}" 
                  class="img-fluid rounded" alt="Shutter Speed Demo">

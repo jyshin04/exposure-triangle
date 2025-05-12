@@ -148,9 +148,9 @@ def learn_9():
 def learn_10():
     return render_template('learn_10.html')
 
-@app.route('/quiz/11')
+@app.route('/quiz/8')
 def quiz_11():
-    return render_template('learn_11.html')
+    return render_template('quiz_8.html')
 
 @app.route('/finish')
 def finish():
