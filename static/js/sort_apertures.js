@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
         dragClass: 'sortable-drag',
     });
 });
+let resultSaved = false; // Track if the result has been saved
 
 function checkOrder() {
     const items = document.querySelectorAll(".sortable-item");
@@ -34,24 +35,27 @@ function checkOrder() {
         nextBtn.style.display = "inline-block";
     }
 
-
-    // ✅ Send result to Flask
-    const questionId = document.querySelector('.quiz-container').dataset.questionId;// assumes quiz-container holds data-question-id
-    fetch("/save_quiz_result", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            question_id: questionId,
-            correct: isCorrect
+    // ✅ Only save the first attempt
+    if (!resultSaved) {
+        const questionId = document.querySelector('.quiz-container').dataset.questionId;
+        fetch("/save_quiz_result", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                question_id: questionId,
+                correct: isCorrect
+            })
         })
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log("Result saved:", data);
-    })
-    .catch(error => {
-        console.error("Error saving result:", error);
-    });
+        .then(response => response.json())
+        .then(data => {
+            console.log("Result saved:", data);
+        })
+        .catch(error => {
+            console.error("Error saving result:", error);
+        });
+
+        resultSaved = true; // Prevent future saves
+    }
 }

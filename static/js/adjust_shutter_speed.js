@@ -11,6 +11,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const correctFeedback = quizContainer.dataset.feedbackCorrect;
     const incorrectFeedback = quizContainer.dataset.feedbackIncorrect;
 
+    let resultSaved = false; // ✅ Track whether the result has been saved
+
     function save_answer(isCorrect) {
         fetch('/save_quiz_result', {
             method: 'POST',
@@ -36,28 +38,17 @@ document.addEventListener('DOMContentLoaded', function () {
             const userAction = this.dataset.action;
             const isCorrect = userAction === correctAction;
 
-            save_answer(isCorrect);
+            if (!resultSaved) {
+                save_answer(isCorrect);
+                resultSaved = true;
+            }
 
             feedbackContainer.style.display = 'block';
-
-            if (isCorrect) {
-                feedbackContainer.style.backgroundColor = 'rgba(40, 167, 69, 0.1)';
-                feedbackContainer.style.borderColor = '#28a745';
-                feedbackTitle.textContent = 'Correct!';
-                feedbackMessage.textContent = 'High ISO increases brightness but adds grain.';
-            } else {
-                feedbackContainer.style.backgroundColor = 'rgba(220, 53, 69, 0.1)';
-                feedbackContainer.style.borderColor = '#dc3545';
-                feedbackTitle.textContent = 'Incorrect';
-                feedbackMessage.textContent = 'Some matches are incorrect.';
-            }
             feedbackContainer.className = isCorrect ? 'feedback correct' : 'feedback incorrect';
             feedbackTitle.textContent = isCorrect ? 'Correct!' : 'Incorrect';
             feedbackMessage.textContent = isCorrect ? correctFeedback : incorrectFeedback;
 
-            
             nextBtn.style.display = 'inline-block';
-            
         });
     });
 });

@@ -93,6 +93,8 @@
     const goalShutter = document.getElementById("goalShutter").value;
     const goalAperture = document.getElementById("goalAperture").value;
 
+    let resultSaved = false;
+
     function updateUserImage() {
         const iso = isoValues[isoSlider.value];
         const shutter = shutterValues[shutterSlider.value];
@@ -139,18 +141,22 @@
         feedbackMessage.innerHTML = messageParts.join("<br>");
     }
 
-    fetch("/save_quiz_result", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-            question_id: "triple_slider",
-            correct: isCorrect
-        })
-    })
-    .then(response => response.json())
-    .then(data => console.log("Result saved:", data))
-    .catch(error => console.error("Error saving result:", error));
-}
+    if (!resultSaved) {
+            resultSaved = true;
+            fetch("/save_quiz_result", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    question_id: "8",
+                    correct: isCorrect
+                })
+            })
+            .then(response => response.json())
+            .then(data => console.log("Result saved:", data))
+            .catch(error => console.error("Error saving result:", error));
+        }
+    }
+
 
 
     [isoSlider, shutterSlider, apertureSlider].forEach(slider => {

@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function checkCompletion() {
         const filledZones = Array.from(dropZones).filter(zone => zone.dataset.selected);
     
-        if (filledZones.length === dropZones.length) {
+        if (filledZones.length === dropZones.length && !feedbackShown) {
             const allCorrect = filledZones.every(zone =>
                 zone.dataset.selected === zone.dataset.correct
             );
