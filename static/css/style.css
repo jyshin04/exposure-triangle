@@ -81,11 +81,11 @@ p, li {
     font-weight: 400; /* Regular weight */
     font-size: 1.2rem;
     color: var(--white) !important;
-    padding: 1rem 1.rem !important;
+    
     margin-right: 0;
     position: relative;
     transition: all 0.3s ease;
-    letter-spacing: 0.5px; /* Slightly tighter spacing for Motor */
+    letter-spacing: 0.5px; 
 }
 
 .nav-link:hover {
@@ -95,7 +95,168 @@ p, li {
 
 
 
+/* Home Page */
 
+/* —————————————————————
+   Home-page navbar override
+   ————————————————————— */
+   .header-nav.navbar-light {
+    position: absolute;   
+    top: 0; 
+    left: 0; 
+    right: 0;
+    width: 100%;
+    background: transparent !important;   /* kill the background */
+    border-bottom: none !important;      /* remove the bottom line */
+    box-shadow: none !important;         /* remove the drop-shadow */
+    z-index: 1000;                        /* sit above the hero */
+  }
+  
+  .home-navbar .navbar-brand {
+    font-size: 25px;
+  }
+  .home-navbar .nav-link:hover,
+  .home-navbar .navbar-brand {
+    color: #fff !important;
+    padding: 5px;
+    border-radius: 8px;
+  }
+
+  .home-navbar .nav-link:hover,
+  .home-navbar .navbar-brand:hover {
+    background-color: rgba(255, 255, 255, 0.15); 
+    transform: translateY(-2px);
+  }
+
+  .hero-overlay-strip {
+    position: absolute;
+    top: 8vh;
+    left: 0;
+    right: 0;
+    height: 72vh; 
+    background: rgba(255, 255, 255, 0.15); 
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  /* HERO */
+  .hero {
+    position: relative;
+    background: url("../images/home_background.jpeg") center/cover no-repeat;
+    height: 80vh;
+    display: flex;
+    align-items: center;
+  }
+  
+  .hero .hero-content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  /* HEADLINE + BUTTONS */
+  .hero-heading {
+    font-size: 55px;
+    color: white;
+    font-family: 'Recoleta', serif;
+    line-height: 1.5;
+  }
+
+  .hero .btn {
+    min-width: 140px;
+    font-family: 'Motor4F', sans-serif;
+  }
+
+  .hero .btn:hover {
+    background-color: #efa338 !important;
+    transform: translateY(-2px);
+  }
+  
+  /* STEPS SECTION */
+  .steps {
+    background: var(--background-color);
+    text-align: center;
+    font-family: 'Motor4F', sans-serif;
+  }
+
+  .steps-container {
+    padding: 2rem;
+  }
+
+  .steps-title {
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    font-weight: 200; 
+    text-transform: uppercase;
+    display: inline-block;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+  }
+  .step-card {
+    background: var(--nav-color);
+    border-radius: 1rem;
+    padding: 2rem;
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s ease;
+    text-align: center;
+    align-items: center;
+    text-decoration: none !important;
+    color: inherit !important;
+    position: relative;
+    overflow: hidden;
+  }
+  .steps-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 1rem;
+    background-color: rgba(211, 214, 190, 0.8); /* semi-white overlay */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    z-index: 1;
+
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+  .steps-lesson {
+    color: var(--primary-color); 
+    font-size: 25px;
+    font-weight: bold;
+  }
+  .step-card img {
+    max-width: 150px;
+    margin-bottom: 1rem;
+  }
+  .step-card .time {
+    font-weight: bold;
+    font-size: 20px;
+    color: #A45D3A;
+  }
+
+  .step-card:hover .steps-overlay {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .arrow-icon {
+    font-size: 3rem;
+    color: var(--button-color);
+    margin: 0 1rem;
+  }
+  @media (max-width: 768px) {
+    .hero .hero-content { flex-direction: column-reverse; text-align: center; }
+    .hero-graphic { margin-bottom: 2rem; }
+  }
 
 /* Back to Home Link */
 .nav-link.back-to-home {
@@ -116,14 +277,14 @@ p, li {
 /* Container Layout */
 .container {
     max-width: 1200px;
-    padding-right: 15px;
-    padding-left: 15px;
+    padding-right: 5px;
+    padding-left: 5px;
     margin-right: auto;
     margin-left: auto;
 }
 
 .container.py-5 {
-    padding-top: 3rem !important;
+    padding-top: 2rem !important;
     padding-bottom: 5rem !important;
 }
 

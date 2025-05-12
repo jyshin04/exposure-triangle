@@ -140,7 +140,6 @@ def view_quiz_results():
     return jsonify(session.get('quiz_results', {}))
 
 
-
 @app.route('/learn/9')
 def learn_9():
     return render_template('learn_9.html')

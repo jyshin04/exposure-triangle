@@ -21,6 +21,7 @@
 <body class="d-flex flex-column min-vh-100">
 
     <!-- Navigation with progress bar -->
+    {% block navbar %}
     <nav class="header-nav navbar navbar-expand-lg">
         <div class="container">
             <!-- Left-aligned back button -->
@@ -35,60 +36,56 @@
             {% endif %}
             
             <!-- Center-aligned progress indicator -->
-            {% if request.path != '/' and request.path != '/finish' %}
-                {% set total_pages = 18 %}
-                {% set current_page = namespace(value=0) %}
+            {% set learn_pages = {
+                '/start': 1,
+                '/learn/1': 1,
+                '/learn/2': 2,
+                '/learn/3': 3,
+                '/learn/4': 4,
+                '/learn/5': 5,
+                '/learn/6': 6,
+                '/learn/7': 7,
+                '/learn/8': 8,
+                '/learn/9': 9,
+                '/learn/10': 10,
+                '/learn/11': 11
+            } %}
+            
+            {% set quiz_pages = {
+                '/quiz/1': 1,
+                '/quiz/2': 2, '/sort_aperture': 2,
+                '/quiz/3': 3, '/shutter_adjust_1': 3,
+                '/quiz/4': 4, '/shutter_adjust_2': 4,
+                '/quiz/5': 5, '/sort_shutter_speed': 5,
+                '/quiz/6': 6, '/quiz_iso': 6,
+                '/quiz/7': 7, '/sort_iso': 7
+            } %}
+            
+            {% set path = request.path %}
+            {% set current_learn = learn_pages[path] if path in learn_pages else None %}
+            {% set current_quiz = quiz_pages[path] if path in quiz_pages else None %}
                 
-                {# Map each URL path to its corresponding position in the journey #}
-                {% if request.path == '/start' or request.path == '/learn/1' %}
-                    {% set current_page.value = 1 %}
-                {% elif request.path == '/learn/2' %}
-                    {% set current_page.value = 2 %}
-                {% elif request.path == '/learn/3' %}
-                    {% set current_page.value = 3 %}
-                {% elif request.path == '/learn/4' %}
-                    {% set current_page.value = 4 %}
-                {% elif request.path == '/quiz/1' %}
-                    {% set current_page.value = 5 %}
-                {% elif request.path == '/quiz/2' or '/sort_aperture' in request.path %}
-                    {% set current_page.value = 6 %}
-                {% elif request.path == '/learn/5' %}
-                    {% set current_page.value = 7 %}
-                {% elif request.path == '/learn/6' %}
-                    {% set current_page.value = 8 %}
-                {% elif request.path == '/quiz/3' or '/shutter_adjust_1' in request.path %}
-                    {% set current_page.value = 9 %}
-                {% elif request.path == '/quiz/4' or '/shutter_adjust_2' in request.path %}
-                    {% set current_page.value = 10 %}
-                {% elif request.path == '/quiz/5' or '/sort_shutter_speed' in request.path %}
-                    {% set current_page.value = 11 %}
-                {% elif request.path == '/learn/7' %}
-                    {% set current_page.value = 12 %}
-                {% elif request.path == '/learn/8' %}
-                    {% set current_page.value = 13 %}
-                {% elif request.path == '/quiz/6' or '/quiz_iso' in request.path %}
-                    {% set current_page.value = 14 %}
-                {% elif request.path == '/quiz/7' or '/sort_iso' in request.path %}
-                    {% set current_page.value = 15 %}
-                {% elif request.path == '/learn/9' %}
-                    {% set current_page.value = 16 %}
-                {% elif request.path == '/learn/10' %}
-                    {% set current_page.value = 17 %}
-                {% elif request.path == '/learn/11' %}
-                    {% set current_page.value = 18 %}
-                {% endif %}
-                
-                {% set progress_percent = (current_page.value / total_pages) * 100 %}
-                
-                <div class="mx-auto text-center">
-                    <div class="d-flex align-items-center">  <!-- Changed from flex-column to align-items-center -->
-                        <div class="progress mb-1" style="height: 16px; width: 350px; color: white">
-                            <div class="progress-bar bg-success" style="width: {{ progress_percent|int }}%"></div>
-                        </div>
-                        <small class="text-progress ms-3">{{ current_page.value }}/18</small>  <!-- Added ms-3 for left margin -->
-                    </div>
-                </div>
-            {% endif %}
+            {% if current_learn %}
+  {% set progress_percent = (current_learn / 11) * 100 %}
+  <div class="mx-auto text-center">
+      <div class="d-flex align-items-center">
+          <div class="progress mb-1" style="height: 16px; width: 350px;">
+              <div class="progress-bar bg-success" style="width: {{ progress_percent|int }}%"></div>
+          </div>
+          <small class="text-progress ms-3">Lesson {{ current_learn }}/11</small>
+      </div>
+  </div>
+{% elif current_quiz %}
+  {% set progress_percent = (current_quiz / 7) * 100 %}
+  <div class="mx-auto text-center">
+      <div class="d-flex align-items-center">
+          <div class="progress mb-1" style="height: 16px; width: 350px;">
+              <div class="progress-bar bg-warning" style="width: {{ progress_percent|int }}%"></div>
+          </div>
+          <small class="text-progress ms-3">Quiz {{ current_quiz }}/7</small>
+      </div>
+  </div>
+{% endif %}
             
             <!-- Right-aligned navigation links -->
             <div class="ml-auto">
@@ -108,28 +105,21 @@
             </div>
         </div>
     </nav>
+    {% endblock %}
 
-    <main class="flex-grow-1">
-        <div class="container py-5">
-            <!-- Flash messages -->
-            {% with messages = get_flashed_messages() %}
-                {% if messages %}
-                    <div class="alert">
-                        {% for message in messages %}
-                            <p>{{ message }}</p>
-                        {% endfor %}
-                    </div>
-                {% endif %}
-            {% endwith %}
-            
-            <!-- Main content block with back button wrapper -->
-            <div class="position-relative" style="min-height: 80vh;">
-                
-                
-                {% block content %}{% endblock %}
-            </div>
+{% block hero %}{% endblock %}
+
+<main class="flex-grow-1">
+    {% block steps %}{% endblock %}
+    <div class="container py-5">
+        <!-- Flash messages -->
+    
+        <!-- Main content block with back button wrapper -->
+        <div class="position-relative" style="min-height: 80vh;">
+            {% block content %}{% endblock %}
         </div>
-    </main>
+    </div>
+</main>
     {% block scripts %}{% endblock %}
 </body>
 </html>

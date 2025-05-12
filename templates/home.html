@@ -1,30 +1,85 @@
 {% extends "layout.html" %}
-{% block content %}
-<div class="home-container text-center">
-    <h2 class="welcome-heading mb-4">Welcome to</h2>
-    <h1 class="camera-basics-heading mb-5">Camera Basics: The Exposure Triangle</h1>
-    
-    <p class="lead mb-4">Learn how to take better photos by mastering the Exposure Triangle — the balance between Aperture, Shutter Speed, and ISO.</p>
+
+{% block navbar %}
+<nav class="header-nav navbar position-absolute w-100 navbar-light home-navbar">
+  <div class="container-fluid px-5 d-flex justify-content-between align-items-center mt-3 h-100">
+    <!-- Left: Home -->
+    <a class="navbar-brand text-white" href="/">
+      <i class="fas fa-bars"></i> Home
+    </a>
+
+    <!-- Right: learn and quiz -->
+    <div class="d-flex gap-5">
+        <a href="/learn/1" class="nav-link text-white">Learn</a>
+        <a href="/quiz/1" class="nav-link text-white">Quiz</a>
+      </div>
+  </div>
+</nav>
+{% endblock %}
 
 
-    <div class="mb-5">
-        <img src="{{ url_for('static', filename='images/img_learn_1_1.png') }}" 
-             width=200px
-             alt="Exposure Triangle Diagram"
-             class="img-fluid rounded">
+{% block hero %}
+<section class="hero">
+  <div class="hero-content container-fluid px-0 position-relative d-flex flex-column align-items-start h-100">
+    <!-- Semi-white overlay under navbar -->
+    <div class="hero-overlay-strip"></div>
+    <!-- Left-aligned heading -->
+    <div class="ps-5" style="margin-top: 300px;">
+        <h1 class="text-white text-start hero-heading">
+          Shoot Better.<br/>Learn the Exposure Triangle.
+        </h1>
     </div>
 
-    <div class="start-section">
-        <button onclick="location.href='/start'" 
-                class="btn btn-lg btn-success">
-            START LEARNING
-        </button>
+    <!-- Full-page centered buttons -->
+    <div class="w-100 d-flex justify-content-center gap-5 mt-auto mb-3">
+      <a href="/learn/1" class="btn btn-warning btn-lg">Lesson</a>
+      <a href="/quiz/1" class="btn btn-warning btn-lg">Quiz</a>
     </div>
 
-    <div class="text-muted skip-link">
-        <small onclick="location.href='/play'" >
-            SKIP TO TRY IT YOURSELF
-        </small>
+    <!-- Right-aligned triangle graphic -->
+    <div class="hero-graphic pe-5 position-absolute end-0 top-50 translate-middle-y">
+      <img src="{{ url_for('static', filename='images/home_exposure_triangle.png') }}"
+           alt="Exposure Triangle" class="img-fluid" style="max-width:600px;">
     </div>
-</div>
+
+  </div>
+</section>
+{% endblock %}
+
+{% block steps %}
+  <!-- STEPS -->
+  <section class="steps">
+    <div class="steps-container">
+      <div class="steps-title">-Master the Balance in Under 10 Minutes-</div>
+      <div class="d-flex justify-content-center align-items-center flex-wrap">
+        <a href="/learn/2" class="step-card">
+            <div class="steps-overlay">
+                <div class="steps-lesson">SKIP TO APERTURE</div>
+            </div>
+          <img src="{{ url_for('static', filename='images/home_aperture_icon.png') }}" alt="ISO">
+          <div class="time">3 MIN</div>
+        </a>
+
+        <i class="fas fa-arrow-right arrow-icon"></i>
+
+        <a href="/learn/5" class="step-card">
+            <div class="steps-overlay">
+                <div class="steps-lesson">SKIP TO SHUTTER SPEED</div>
+            </div>
+          <img src="{{ url_for('static', filename='images/home_shutter_icon.png') }}" alt="Shutter Speed">
+          <div class="time">3 MIN</div>
+        </a>
+
+        <i class="fas fa-arrow-right arrow-icon"></i>
+
+        <a href="/learn/7" class="step-card">
+            <div class="steps-overlay">
+                <div class="steps-lesson">SKIP TO ISO</div>
+            </div>
+          <img src="{{ url_for('static', filename='images/home_iso_icon.png') }}" alt="Aperture">
+          <div class="time">3 MIN</div>
+        </a>
+      </div>
+    </div>
+  </section>
 {% endblock %}
