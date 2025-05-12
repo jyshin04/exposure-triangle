@@ -66,8 +66,18 @@
             {% set path = request.path %}
             {% set current_learn = learn_pages[path] if path in learn_pages else None %}
             {% set current_quiz = quiz_pages[path] if path in quiz_pages else None %}
-                
-            {% if current_learn %}
+
+            {% if path == '/finish' %}
+            <!-- Render invisible progress bar to maintain layout -->
+            <div class="mx-auto text-center" style="visibility: hidden;">
+                <div class="d-flex align-items-center">
+                    <div class="progress mb-1" style="height: 16px; width: 350px;">
+                        <div class="progress-bar" style="width: 100%"></div>
+                    </div>
+                    <small class="text-progress ms-3">Quiz 8/8</small>
+                </div>
+            </div>                
+{% elif current_learn %}
   {% set progress_percent = (current_learn / 10) * 100 %}
   <div class="mx-auto text-center">
       <div class="d-flex align-items-center">
