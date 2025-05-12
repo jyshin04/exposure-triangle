@@ -156,6 +156,11 @@ def quiz_11():
 def finish():
     return render_template('finish.html')
 
+@app.route('/lesson_finish')
+def lesson_finish():
+    return render_template('lesson_finish.html')
+
+
 
 if __name__ == '__main__':
     app.run(debug=True, port=5001)

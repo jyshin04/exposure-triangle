@@ -67,7 +67,7 @@
             {% set current_learn = learn_pages[path] if path in learn_pages else None %}
             {% set current_quiz = quiz_pages[path] if path in quiz_pages else None %}
 
-            {% if path == '/finish' %}
+            {% if path == '/finish' or path == '/lesson_finish' %}
             <!-- Render invisible progress bar to maintain layout -->
             <div class="mx-auto text-center" style="visibility: hidden;">
                 <div class="d-flex align-items-center">
@@ -101,7 +101,7 @@
             
             <!-- Right-aligned navigation links -->
             <div class="ml-auto">
-                <div class="d-flex align-items-center">
+                <div class="d-flex align-items-center gap-5">
                     {% if '/start' in request.path %}
                         <a href="/quiz/1" class="nav-link">QUIZ</a>
                     {% elif '/learn/' in request.path %}

@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="home-container text-center">
+    <h2 class="welcome-heading mb-4">🎉 You’ve completed the lesson!</h2>
+
+    <p class="lead mb-4">Now test your knowledge with a mini quiz.</p>
+
+    <div class="start-section d-flex flex-column align-items-center">
+        <a href="/quiz/1" class="btn btn-primary btn-lg mb-3">
+            TAKE THE QUIZ 
+        </a>
+        <a href="/" class="btn btn-outline-secondary">
+            BACK TO HOME
+        </a>
+    </div>
+</div>
+
+
+<script>
+    window.addEventListener('load', () => {
+        confetti({
+            particleCount: 170,
+            spread: 80,
+            origin: { y: 0.6 }
+        });
+    });
+      
+    </script>
+{% endblock %}
