@@ -2,69 +2,78 @@
 {% block content %}
 <div class="position-relative" style="min-height: 80vh;">
     <div>
-        <h2 class="camera-basics-heading mb-5">Play with the Exposure Triangle 🎮</h2>
-        <p class="fs-5">Use the sliders below to adjust the bottom image match with the goal image.</p>
+        <h2 class="camera-basics-heading mb-5">Exposure Triangle Challenge 🎯</h2>
+        <p class="fs-5">Adjust the sliders to match your image with the goal image.</p>
     </div>
     <div class="mt-4 row align-items-start g-4">
-
-    <!-- Images Column -->
-    <div class="col-md-6">
-        <!-- Goal Image Container -->
-        <div class="mb-4 position-relative">
-            <p class="fs-5"><strong>Goal Image</strong></p>
-            <img id="Exposure-triangle-goal-play2-img"
-     src="{{ url_for('static', filename='images/goal.png') }}"
-     alt="Exposure Triangle Demo2 Goal" 
-     class="img-fluid rounded shadow">
+        <!-- Images Column - Now side by side -->
+        <div class="col-md-6">
+            <div class="row">
+                <!-- Goal Image -->
+                <div class="col-md-6 mb-4">
+                    <p class="fs-5 fw-bold">Goal Image</p>
+                    <img id="goalImage"
+                         src="{{ url_for('static', filename='images/play-triple-slider/800_1_60_8.jpg') }}"
+                         alt="Goal Exposure" 
+                         class="img-fluid rounded shadow">
+                </div>
+                
+                <!-- User's Image -->
+                <div class="col-md-6 mb-4">
+                    <p class="fs-5 fw-bold">Your Adjustment</p>
+                    <img id="userImage"
+                         src="{{ url_for('static', filename='images/play-triple-slider/200_1_15_4.jpg') }}"
+                         alt="Your Exposure" 
+                         class="img-fluid rounded shadow">
+                    <div id="feedback" class="mt-2"></div>
+                </div>
+            </div>
         </div>
 
-        <!-- Demo Image Container -->
-        <div class="position-relative">
-            <p class="fs-5"><strong>Your Adjustment</strong></p>
-            <img id="Exposure-triangle-play2-img"
-     src="{{ url_for('static', filename='images/working.png') }}"
-     alt="Exposure Triangle Demo 2" 
-     class="img-fluid rounded shadow">
-        </div>
-    </div>
-
-        <!-- Sliders Column -->
+        <!-- Sliders Column (unchanged) -->
         <div class="col-md-6">
             <div class="d-flex flex-column gap-4">
-                <!-- Aperture Slider -->
+                <!-- ISO Slider -->
                 <div class="text-center">
-                    <label for="apertureSlider" class="form-label fw-bold fs-5">Aperture</label>
-                    <input type="range" min="1" max="4" value="1" 
-                           class="form-range w-75 mx-auto" id="apertureSlider">
-                    <p id="apertureValue" class="mt-2 fs-5 mb-0">f/2.8</p>
+                    <label for="isoSlider" class="form-label fw-bold fs-5">ISO</label>
+                    <input type="range" min="1" max="3" value="1" step="1"
+                           class="form-range w-75 mx-auto" id="isoSlider">
+                    <p id="isoValue" class="mt-2 fs-5 mb-0">200</p>
                 </div>
 
                 <!-- Shutter Speed Slider -->
                 <div class="text-center">
                     <label for="shutterSlider" class="form-label fw-bold fs-5">Shutter Speed</label>
-                    <input type="range" min="1" max="4" value="1" 
+                    <input type="range" min="1" max="3" value="1" step="1"
                            class="form-range w-75 mx-auto" id="shutterSlider">
-                    <p id="shutterValue" class="mt-2 fs-5 mb-0">1/4</p>
+                    <p id="shutterValue" class="mt-2 fs-5 mb-0">1/15</p>
                 </div>
 
-                <!-- ISO Slider -->
+                <!-- Aperture Slider -->
                 <div class="text-center">
-                    <label for="isoSlider" class="form-label fw-bold fs-5">ISO</label>
-                    <input type="range" min="1" max="4" value="1" 
-                           class="form-range w-75 mx-auto" id="isoSlider">
-                    <p id="isoValue" class="mt-2 fs-5 mb-0">300</p>
+                    <label for="apertureSlider" class="form-label fw-bold fs-5">Aperture</label>
+                    <input type="range" min="1" max="3" value="1" step="1"
+                           class="form-range w-75 mx-auto" id="apertureSlider">
+                    <p id="apertureValue" class="mt-2 fs-5 mb-0">f/4</p>
                 </div>
             </div>
+            
+            <!-- Hidden goal settings -->
+            <input type="hidden" id="goalISO" value="800">
+            <input type="hidden" id="goalShutter" value="1_60">
+            <input type="hidden" id="goalAperture" value="8">
         </div>
     </div>
 
     <div class="d-flex justify-content-between align-items-end mt-auto py-3">
-        <a href="/learn/10" class="btn btn-outline-secondary btn-lg">
-            BACK
-        </a>
-        
-        <a href="/quiz/1" class="btn btn-primary btn-lg">
-            TAKE THE QUIZ <i class="fa-solid fa-circle-chevron-right ms-2"></i>
+        <button id="checkButton" class="btn btn-success btn-lg">
+            CHECK MATCH
+        </button>
+        <a href="/finish" 
+           class="btn btn-primary btn-lg" 
+           id="next-btn" 
+           style="display:none;">
+            FINISH
         </a>
     </div>
 </div>
@@ -72,21 +81,84 @@
 
 {% block scripts %}
 <script>
-    const slider = document.getElementById("apertureSlider");
-    const image = document.getElementById("aperture-img");
-    const valueText = document.getElementById("apertureValue");
-
-    const apertures = {
-        1: { value: "f/2.8", src: "{{ url_for('static', filename='images/img_learn_5_1.png') }}" },
-        2: { value: "f/5.6", src: "{{ url_for('static', filename='images/img_learn_5_2.png') }}" },
-        3: { value: "f/8",   src: "{{ url_for('static', filename='images/img_learn_5_3.png') }}" },
-        4: { value: "f/16",  src: "{{ url_for('static', filename='images/img_learn_5_4.png') }}" }
+    // Mapping for ISO values
+    const isoValues = {
+        1: "200",
+        2: "800",
+        3: "1600"
     };
 
-    slider.addEventListener("input", function () {
-        const setting = apertures[this.value];
-        image.src = setting.src;
-        valueText.textContent = setting.value;
+    // Mapping for Shutter Speed values
+    const shutterValues = {
+        1: "1_15",
+        2: "1_60",
+        3: "1_350"
+    };
+
+    // Mapping for Aperture values
+    const apertureValues = {
+        1: "4",
+        2: "8",
+        3: "16"
+    };
+
+    // Get DOM elements
+    const isoSlider = document.getElementById("isoSlider");
+    const shutterSlider = document.getElementById("shutterSlider");
+    const apertureSlider = document.getElementById("apertureSlider");
+    const userImage = document.getElementById("userImage");
+    const feedbackDiv = document.getElementById("feedback");
+    const checkButton = document.getElementById("checkButton");
+
+    // Goal settings
+    const goalISO = document.getElementById("goalISO").value;
+    const goalShutter = document.getElementById("goalShutter").value;
+    const goalAperture = document.getElementById("goalAperture").value;
+
+    // Function to update the user's image
+    function updateUserImage() {
+        const iso = isoValues[isoSlider.value];
+        const shutter = shutterValues[shutterSlider.value];
+        const aperture = apertureValues[apertureSlider.value];
+        
+        // Update displayed values
+        document.getElementById("isoValue").textContent = iso;
+        document.getElementById("shutterValue").textContent = `1/${shutter.split('_')[1]}`;
+        document.getElementById("apertureValue").textContent = `f/${aperture}`;
+        
+        // Update image source
+        userImage.src = `{{ url_for('static', filename='images/play-triple-slider/') }}${iso}_${shutter}_${aperture}.jpg`;
+    }
+
+    // Function to check if user matches the goal
+    function checkMatch() {
+        const userISO = isoValues[isoSlider.value];
+        const userShutter = shutterValues[shutterSlider.value];
+        const userAperture = apertureValues[apertureSlider.value];
+        
+        if (userISO === goalISO && userShutter === goalShutter && userAperture === goalAperture) {
+            feedbackDiv.innerHTML = `<div class="alert alert-success">Perfect match! 🎉</div>`;
+            checkButton.classList.remove("btn-success");
+            checkButton.classList.add("btn-secondary");
+            checkButton.disabled = true;
+        } else {
+            let feedback = [];
+            if (userISO !== goalISO) feedback.push("ISO doesn't match");
+            if (userShutter !== goalShutter) feedback.push("Shutter speed doesn't match");
+            if (userAperture !== goalAperture) feedback.push("Aperture doesn't match");
+            
+            feedbackDiv.innerHTML = `<div class="alert alert-warning">${feedback.join(", ")}. Keep trying!</div>`;
+        }
+    }
+
+    // Add event listeners
+    [isoSlider, shutterSlider, apertureSlider].forEach(slider => {
+        slider.addEventListener("input", updateUserImage);
     });
+    
+    checkButton.addEventListener("click", checkMatch);
+
+    // Initialize
+    updateUserImage();
 </script>
 {% endblock %}

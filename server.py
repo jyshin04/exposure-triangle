@@ -148,8 +148,8 @@ def learn_9():
 def learn_10():
     return render_template('learn_10.html')
 
-@app.route('/learn/11')
-def learn_11():
+@app.route('/quiz/11')
+def quiz_11():
     return render_template('learn_11.html')
 
 @app.route('/finish')

@@ -153,6 +153,11 @@
           }
         ]
       }
+    },
+    {
+      "id": 8,
+      "type": "triple_slider",
+      "template": "learn_11.html"
     }
     ]
   }
