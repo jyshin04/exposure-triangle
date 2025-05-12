@@ -8,10 +8,14 @@ document.addEventListener('DOMContentLoaded', function() {
     const feedbackMessage = document.getElementById('feedback-message');
     const nextBtn = document.getElementById('next-btn');
     let feedbackShown = false;
+    const originalContainers = {};
+
 
     draggables.forEach(draggable => {
+        originalContainers[draggable.id] = draggable.parentElement;
         draggable.addEventListener('dragstart', dragStart);
     });
+    
 
     dropZones.forEach(zone => {
         zone.addEventListener('dragover', dragOver);
@@ -99,9 +103,21 @@ document.addEventListener('DOMContentLoaded', function() {
             } else {
                 showFeedback(false);
                 dropZones.forEach(zone => {
-                    if (zone.dataset.selected !== zone.dataset.correct) {
+                    const selected = zone.dataset.selected;
+                    const correct = zone.dataset.correct;
+                    const draggable = zone.querySelector('.draggable');
+    
+                    if (selected !== correct && draggable) {
                         zone.classList.add('incorrect');
-                    } else {
+    
+                        // Restore draggable to original container
+                        draggable.setAttribute('draggable', 'true');
+                        draggable.style.cursor = 'grab';
+                        originalContainers[draggable.id].appendChild(draggable);
+    
+                        zone.innerHTML = '<span class="placeholder">Drop ISO here</span>';
+                        delete zone.dataset.selected;
+                    } else if (selected === correct) {
                         zone.classList.add('correct');
                     }
                 });
@@ -110,6 +126,7 @@ document.addEventListener('DOMContentLoaded', function() {
             nextBtn.style.display = 'inline-block';
         }
     }
+    
     
 
     function showFeedback(isCorrect) {

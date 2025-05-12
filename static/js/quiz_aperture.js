@@ -6,8 +6,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const feedbackMessage = document.getElementById('feedback-message');
     const nextBtn = document.getElementById('next-btn');
     let feedbackShown = false;
+    const originalContainers = {};
+
 
     draggables.forEach(draggable => {
+        originalContainers[draggable.id] = draggable.parentElement;
         draggable.addEventListener('dragstart', dragStart);
     });
 
@@ -97,12 +100,25 @@ document.addEventListener('DOMContentLoaded', function() {
             } else {
                 showFeedback(false);
                 dropZones.forEach(zone => {
-                    if (zone.dataset.selected !== zone.dataset.correct) {
+                    const selected = zone.dataset.selected;
+                    const correct = zone.dataset.correct;
+                    const draggable = zone.querySelector('.draggable');
+                
+                    if (selected !== correct && draggable) {
                         zone.classList.add('incorrect');
-                    } else {
+                
+                        // Restore the draggable to its original container
+                        draggable.setAttribute('draggable', 'true');
+                        draggable.style.cursor = 'grab';
+                
+                        originalContainers[draggable.id].appendChild(draggable);
+                        zone.innerHTML = '<span class="placeholder">Drop f-number here</span>';
+                        delete zone.dataset.selected;
+                    } else if (selected === correct) {
                         zone.classList.add('correct');
                     }
                 });
+                
             }
     
             nextBtn.style.display = 'inline-block';

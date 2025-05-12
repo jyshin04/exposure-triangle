@@ -32,26 +32,29 @@
         <!-- Sliders Column -->
         <div class="col-md-6">
             <div class="d-flex flex-column gap-4">
-                <div class="text-center">
-                    <label for="isoSlider" class="form-label fw-bold fs-5">ISO</label>
-                    <input type="range" min="1" max="3" value="1" step="1"
-                           class="form-range w-75 mx-auto" id="isoSlider">
-                    <p id="isoValue" class="mt-2 fs-5 mb-0">200</p>
-                </div>
+               <!-- ISO Slider -->
+               <div class="d-flex flex-column align-items-center w-100">
+                <label for="isoSlider" class="form-label fw-bold fs-5 mb-1">ISO</label>
+                <input type="range" min="1" max="3" value="1" step="1"
+                       class="form-range w-75" id="isoSlider">
+                <p id="isoValue" class="fs-5 mt-1 mb-0">200</p>
+            </div>
 
-                <div class="text-center">
-                    <label for="shutterSlider" class="form-label fw-bold fs-5">Shutter Speed</label>
-                    <input type="range" min="1" max="3" value="1" step="1"
-                           class="form-range w-75 mx-auto" id="shutterSlider">
-                    <p id="shutterValue" class="mt-2 fs-5 mb-0">1/15</p>
-                </div>
+            <!-- Shutter Speed Slider -->
+            <div class="d-flex flex-column align-items-center w-100">
+                <label for="shutterSlider" class="form-label fw-bold fs-5 mb-1">Shutter Speed</label>
+                <input type="range" min="1" max="3" value="1" step="1"
+                       class="form-range w-75 mx-auto" id="shutterSlider">
+                <p id="shutterValue"  class="fs-5 mt-1 mb-0">1/15</p>
+            </div>
 
-                <div class="text-center">
-                    <label for="apertureSlider" class="form-label fw-bold fs-5">Aperture</label>
-                    <input type="range" min="1" max="3" value="1" step="1"
-                           class="form-range w-75 mx-auto" id="apertureSlider">
-                    <p id="apertureValue" class="mt-2 fs-5 mb-0">f/4</p>
-                </div>
+            <!-- Aperture Slider -->
+            <div class="d-flex flex-column align-items-center w-100">
+                <label for="apertureSlider" class="form-label fw-bold fs-5 mb-1">Aperture</label>
+                <input type="range" min="1" max="3" value="1" step="1"
+                       class="form-range w-75 mx-auto" id="apertureSlider">
+                <p id="apertureValue" class="fs-5 mt-1 mb-0">f/4</p>
+            </div>
             </div>
 
             <!-- Hidden Goal Settings -->
