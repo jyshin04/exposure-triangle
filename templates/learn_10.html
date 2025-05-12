@@ -3,43 +3,42 @@
 <div class="position-relative" style="min-height: 80vh;">
     <div>
         <h2 class="camera-basics-heading mb-5">Play with the Exposure Triangle 🎮</h2>
-        <p class="fs-5">Use the sliders below to see how aperture, shutter speed, and ISO affect the image.
-        </p>
+        <p class="fs-5">Use the sliders below to see how aperture, shutter speed, and ISO affect the image.</p>
     </div>
     <div class="mt-4 row align-items-start g-4">
         <!-- Image Column -->
         <div class="col-md-6">
-            <img id="Exposure-triangle-play-img"
-     src="{{ url_for('static', filename='images/demo.jpg') }}"
-     alt="Exposure Triangle Demo" 
-     class="img-fluid rounded shadow">
+            <img id="exposureImage"
+                 src="{{ url_for('static', filename='images/play-triple-slider/200_1_15_4.jpg') }}"
+                 alt="Exposure Triangle Demo" 
+                 class="img-fluid rounded shadow">
         </div>
 
         <!-- Sliders Column -->
         <div class="col-md-6">
             <div class="d-flex flex-column gap-4">
-                <!-- Aperture Slider -->
+                <!-- ISO Slider -->
                 <div class="text-center">
-                    <label for="apertureSlider" class="form-label fw-bold fs-5">Aperture</label>
-                    <input type="range" min="1" max="4" value="1" 
-                           class="form-range w-75 mx-auto" id="apertureSlider">
-                    <p id="apertureValue" class="mt-2 fs-5 mb-0">f/2.8</p>
+                    <label for="isoSlider" class="form-label fw-bold fs-5">ISO</label>
+                    <input type="range" min="1" max="3" value="1" step="1"
+                           class="form-range w-75 mx-auto" id="isoSlider">
+                    <p id="isoValue" class="mt-2 fs-5 mb-0">200</p>
                 </div>
 
                 <!-- Shutter Speed Slider -->
                 <div class="text-center">
                     <label for="shutterSlider" class="form-label fw-bold fs-5">Shutter Speed</label>
-                    <input type="range" min="1" max="4" value="1" 
+                    <input type="range" min="1" max="3" value="1" step="1"
                            class="form-range w-75 mx-auto" id="shutterSlider">
-                    <p id="shutterValue" class="mt-2 fs-5 mb-0">1/4</p>
+                    <p id="shutterValue" class="mt-2 fs-5 mb-0">1/15</p>
                 </div>
 
-                <!-- ISO Slider -->
+                <!-- Aperture Slider -->
                 <div class="text-center">
-                    <label for="isoSlider" class="form-label fw-bold fs-5">ISO</label>
-                    <input type="range" min="1" max="4" value="1" 
-                           class="form-range w-75 mx-auto" id="isoSlider">
-                    <p id="isoValue" class="mt-2 fs-5 mb-0">300</p>
+                    <label for="apertureSlider" class="form-label fw-bold fs-5">Aperture</label>
+                    <input type="range" min="1" max="3" value="1" step="1"
+                           class="form-range w-75 mx-auto" id="apertureSlider">
+                    <p id="apertureValue" class="mt-2 fs-5 mb-0">f/4</p>
                 </div>
             </div>
         </div>
@@ -59,21 +58,53 @@
 
 {% block scripts %}
 <script>
-    const slider = document.getElementById("apertureSlider");
-    const image = document.getElementById("aperture-img");
-    const valueText = document.getElementById("apertureValue");
-
-    const apertures = {
-        1: { value: "f/2.8", src: "{{ url_for('static', filename='images/img_learn_5_1.png') }}" },
-        2: { value: "f/5.6", src: "{{ url_for('static', filename='images/img_learn_5_2.png') }}" },
-        3: { value: "f/8",   src: "{{ url_for('static', filename='images/img_learn_5_3.png') }}" },
-        4: { value: "f/16",  src: "{{ url_for('static', filename='images/img_learn_5_4.png') }}" }
+    // Mapping for ISO values
+    const isoValues = {
+        1: "200",
+        2: "800",
+        3: "1600"
     };
 
-    slider.addEventListener("input", function () {
-        const setting = apertures[this.value];
-        image.src = setting.src;
-        valueText.textContent = setting.value;
+    // Mapping for Shutter Speed values
+    const shutterValues = {
+        1: "1_15",
+        2: "1_60",
+        3: "1_350"
+    };
+
+    // Mapping for Aperture values
+    const apertureValues = {
+        1: "4",
+        2: "8",
+        3: "16"
+    };
+
+    const isoSlider = document.getElementById("isoSlider");
+    const shutterSlider = document.getElementById("shutterSlider");
+    const apertureSlider = document.getElementById("apertureSlider");
+    const exposureImage = document.getElementById("exposureImage");
+
+    // Function to update the image and displayed values
+    function updateExposure() {
+        const iso = isoValues[isoSlider.value];
+        const shutter = shutterValues[shutterSlider.value];
+        const aperture = apertureValues[apertureSlider.value];
+        
+        // Update displayed values
+        document.getElementById("isoValue").textContent = iso;
+        document.getElementById("shutterValue").textContent = `1/${shutter.split('_')[1]}`;
+        document.getElementById("apertureValue").textContent = `f/${aperture}`;
+        
+        // Update image source (matches your filename pattern: ISO_SHUTTER_APERTURE.jpg)
+        exposureImage.src = `{{ url_for('static', filename='images/play-triple-slider/') }}${iso}_${shutter}_${aperture}.jpg`;
+    }
+
+    // Add event listeners to all sliders
+    [isoSlider, shutterSlider, apertureSlider].forEach(slider => {
+        slider.addEventListener("input", updateExposure);
     });
+
+    // Initialize the display
+    updateExposure();
 </script>
 {% endblock %}
