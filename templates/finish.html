@@ -23,7 +23,16 @@
     </div>
 </div>
 
+
 <script>
+    window.addEventListener('load', () => {
+        confetti({
+            particleCount: 170,
+            spread: 80,
+            origin: { y: 0.6 }
+        });
+    });
+
     document.addEventListener('DOMContentLoaded', function () {
         fetch('http://127.0.0.1:5001/quiz_results')
             .then(response => response.json())
