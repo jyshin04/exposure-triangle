@@ -284,7 +284,7 @@ p, li {
 }
 
 .container.py-5 {
-    padding-top: 2rem !important;
+    padding-top: 3rem !important;
     padding-bottom: 5rem !important;
 }
 
@@ -340,7 +340,7 @@ p, li {
 
 /* Content Layout */
 .position-relative {
-    padding-bottom: 4rem;
+    padding-bottom: 2rem;
 }
 
 .row.align-items-center {
