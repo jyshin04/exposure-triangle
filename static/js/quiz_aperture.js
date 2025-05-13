@@ -73,7 +73,11 @@ document.addEventListener('DOMContentLoaded', function() {
     function checkCompletion() {
         const filledZones = Array.from(dropZones).filter(zone => zone.dataset.selected);
     
-        if (filledZones.length === dropZones.length && !feedbackShown) {
+        if (filledZones.length === dropZones.length) {
+
+
+
+
             const allCorrect = filledZones.every(zone =>
                 zone.dataset.selected === zone.dataset.correct
             );
@@ -81,18 +85,20 @@ document.addEventListener('DOMContentLoaded', function() {
             const questionId = document.querySelector('.quiz-container').dataset.questionId;
     
             // Send result to Flask
-            fetch('/save_quiz_result', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    question_id: questionId,
-                    correct: allCorrect
-                })
-            });
-    
-            feedbackShown = true;
+            if (!feedbackShown) {
+                fetch('/save_quiz_result', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        question_id: questionId,
+                        correct: allCorrect
+                    })
+                });
+                feedbackShown = true;
+            }
+            
     
             if (allCorrect) {
                 showFeedback(true);
